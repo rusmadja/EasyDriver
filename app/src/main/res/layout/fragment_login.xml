@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginFragment"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/Primary"
+        android:orientation="vertical"
+        >
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/ic_wave__1_" />
+
+        <EditText
+            android:id="@+id/Lmail"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/text_view"
+            android:layout_marginStart="10pt"
+            android:layout_marginTop="10pt"
+            android:layout_marginEnd="10pt"
+            android:hint="  enter your mail"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/text_input_color"
+            android:textSize="20dp"
+            android:drawableStart="@drawable/ic_email_24px"/>
+
+        <EditText
+            android:id="@+id/Lpassword"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/text_view"
+            android:layout_marginStart="10pt"
+            android:layout_marginTop="10pt"
+            android:layout_marginEnd="10pt"
+            android:hint="  enter your password"
+            android:inputType="textPassword"
+            android:textSize="20dp"
+            android:drawableStart="@drawable/ic_lock_white_24dp"
+
+            />
+
+        <Button
+            android:id="@+id/resetMdp"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:layout_marginStart="10pt"
+            android:layout_marginEnd="10pt"
+            android:background="@android:color/transparent"
+            android:text="forgot password ?"
+            android:textAlignment="textEnd"
+            android:textColor="@color/Clickable_Secondary"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/LGoToOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginStart="10pt"
+            android:layout_marginTop="30pt"
+            android:layout_marginEnd="10pt"
+            android:background="@drawable/button_next"
+            android:text="Login"
+            android:textColor="@color/Primary" />
+
+        <Button
+            android:id="@+id/LGoToSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5pt"
+            android:background="@android:color/transparent"
+            android:text="You don't have an account ? sign in"
+            android:textColor="@color/Clickable_Secondary"
+            android:textSize="12dp" />
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
