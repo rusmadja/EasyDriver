@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 class LoginFragment : Fragment() {
     private lateinit var mail: EditText
     private lateinit var password: EditText
-    private lateinit var userId: String
+    private lateinit var driverId: String
     private lateinit var resetPassword: Button
 
 
@@ -66,11 +66,11 @@ class LoginFragment : Fragment() {
 
     private fun checkUserExist(mail: String, password: String) {
 
-        UserViewModel().SignInUser(mail, password).addOnCompleteListener { task ->
+        DriverViewModel().SignInDriver(mail, password).addOnCompleteListener { task ->
 
             if (task.isSuccessful) {
-                userId = FirebaseAuth.getInstance().uid.toString()
-                val bundle = bundleOf("userID" to userId)
+                driverId = FirebaseAuth.getInstance().uid.toString()
+                val bundle = bundleOf("driverId" to driverId)
                 Toast.makeText(this.activity, "welcome", Toast.LENGTH_LONG).show()
                 findNavController().navigate(
                     R.id.action_loginFragment_to_contextAppActivity,

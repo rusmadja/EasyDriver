@@ -21,9 +21,9 @@ class Signin : Fragment() {
     lateinit var firstName: EditText
     lateinit var lastName: EditText
     lateinit var telephone: EditText
-    lateinit var user: User
-    lateinit var userId: String
-    lateinit var userViewModel: UserViewModel
+    lateinit var driver: Driver
+    lateinit var driverId: String
+    lateinit var driverViewModel: DriverViewModel
 
 
     override fun onCreateView(
@@ -72,7 +72,7 @@ class Signin : Fragment() {
         firstName = view.findViewById<EditText>(R.id.firstName)
         lastName = view.findViewById<EditText>(R.id.lastName)
         telephone = view.findViewById(R.id.phone_number)
-        userViewModel = UserViewModel()
+        driverViewModel = DriverViewModel()
 
     }
 
@@ -87,11 +87,11 @@ class Signin : Fragment() {
 
         UserViewModel().StoreUser(mail, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                userId = FirebaseAuth.getInstance().uid.toString()
+                 driverId = FirebaseAuth.getInstance().uid.toString()
                 Toast.makeText(this.activity, "welcome", Toast.LENGTH_LONG).show()
-                createUser()
-                userViewModel.setUserInFirebase(user)
-                val bundle = bundleOf("userID" to userId)
+                createDriver()
+                driverViewModel.setdriverInFirebase(driver)
+                val bundle = bundleOf("driverId" to driverId )
                 findNavController().navigate(
                     R.id.action_signin_to_contextAppActivity,
                     bundle
@@ -107,9 +107,9 @@ class Signin : Fragment() {
         }
     }
 
-    private fun createUser() {
-        user = User(
-            userId,
+    private fun createDriver() {
+        driver = Driver(
+            driverId,
             firstName.text.toString(),
             lastName.text.toString(),
             mail.text.toString(),
