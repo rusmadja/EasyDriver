@@ -60,6 +60,7 @@ class Signin : Fragment() {
         setAllButtonClick(view)
 
         mAuth = FirebaseAuth.getInstance()
+
         auth = Firebase.auth
 
         callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
