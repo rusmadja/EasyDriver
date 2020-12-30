@@ -45,43 +45,6 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:187634843008:android:74cfaab00c015aa9871565",
-        "android_client_info": {
-          "package_name": "com.example.appreadfirebaselivedata"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "187634843008-k4mq9h5edvrllijk9uvt27vmq2m6magf.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.appreadfirebaselivedata",
-            "certificate_hash": "b82f18f6e7ad68b17b2163ff7f58f709971af845"
-          }
-        },
-        {
-          "client_id": "187634843008-1b6bqlbi1g54k6vrho9cvfrb41b42c1c.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyB4T9vfy9MmGoYw8BQQlfR6SBLjXPQTqh0"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "187634843008-1b6bqlbi1g54k6vrho9cvfrb41b42c1c.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:187634843008:android:749ed6e52d15a20a871565",
         "android_client_info": {
           "package_name": "com.reouven.be_driver"
@@ -117,6 +80,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "187634843008-p5r8vcstnbu57asgk7cm3npu4bq3c29r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reouven.easydriver",
+            "certificate_hash": "b82f18f6e7ad68b17b2163ff7f58f709971af845"
+          }
+        },
         {
           "client_id": "187634843008-1b6bqlbi1g54k6vrho9cvfrb41b42c1c.apps.googleusercontent.com",
           "client_type": 3
