@@ -8,15 +8,16 @@ class Travel (
     var adresse_arriver:String="",
     var Date_depart:String="",
     var Date_arriver:String="",
-    )  {
-    override fun toString(): String = "$userId, " +
-
+    var dateReservation:String="",
+    var Status: String=""
+    )
+{
+    override fun toString(): String =
+                "user:$userId, " +
+                "driver: $driverId"+
                 "$nb_voyageur, " +
                 "$adresse_depart, " +
                 "$adresse_arriver, " +
                 "$Date_depart, " +
                 "$Date_arriver"
-
-
-
 }

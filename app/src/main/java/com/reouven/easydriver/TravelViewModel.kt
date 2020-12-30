@@ -8,7 +8,7 @@ class TravelViewModel : ViewModel() {
     val repo = TravelRepo()
     fun fetchUserData(): LiveData<MutableList<Travel>> {
         val mutableData = MutableLiveData<MutableList<Travel>>()
-        repo.getUserData().observeForever { userlist ->
+        repo.getTravelData().observeForever { userlist ->
             mutableData.value = userlist
         }
         return mutableData

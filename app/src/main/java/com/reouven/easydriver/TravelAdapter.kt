@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -39,6 +40,8 @@ class TravelAdapter(private val context: Context) : RecyclerView.Adapter<TravelA
         var From = itemView.findViewById<TextView>(R.id.adresseFrom)
         var To = itemView.findViewById<TextView>(R.id.adresseTo)
         var passenger = itemView.findViewById<TextView>(R.id.passenger)
+        var buttonValider = itemView.findViewById<Button>(R.id.accepter)
+        var buttonfinish = itemView.findViewById<Button>(R.id.finish)
 
         fun bindView(travel:Travel){
 
@@ -48,9 +51,12 @@ class TravelAdapter(private val context: Context) : RecyclerView.Adapter<TravelA
             To.setText(travel.adresse_arriver)
             passenger.setText(travel.nb_voyageur)
 
+
             itemView.setOnClickListener {
                 Toast.makeText(context,"${travel.toString()}",Toast.LENGTH_LONG).show()
             }
+            buttonValider.setOnClickListener {  }
+            buttonfinish.setOnClickListener {  }
         }
     }
 

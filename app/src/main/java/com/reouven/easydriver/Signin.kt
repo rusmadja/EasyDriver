@@ -95,7 +95,7 @@ class Signin : Fragment() {
 
         view.findViewById<EditText>(R.id.phone_number).setOnClickListener{
             sendCode.visibility = view.visibility
-
+            sendCode.visibility = View.GONE
         }
 
     }
