@@ -1,5 +1,6 @@
 package com.reouven.easydriver
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,10 +22,12 @@ class Signin : Fragment() {
     lateinit var firstName: EditText
     lateinit var lastName: EditText
     lateinit var telephone: EditText
+    lateinit var codeVerification: EditText
     lateinit var driver: Driver
     lateinit var driverId: String
     lateinit var driverViewModel: DriverViewModel
-
+    lateinit var sendCode : Button
+    lateinit var verification : Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,6 +67,19 @@ class Signin : Fragment() {
             findNavController().navigate(R.id.action_signin_to_loginFragment)
         }
 
+        view.findViewById<EditText>(R.id.phone_number).setOnClickListener{
+            sendCode.visibility = view.visibility
+        }
+        sendCode.setOnClickListener {
+            // ajouter la verif ici
+
+            codeVerification.visibility = view.visibility
+            verification.visibility = view.visibility
+            sendCode.isEnabled = false
+        }
+        verification.setOnClickListener {
+            //faire lauthntification
+        }
     }
 
     private fun initAllData(view: View) {
@@ -71,8 +87,11 @@ class Signin : Fragment() {
         password = view.findViewById<EditText>(R.id.password)
         firstName = view.findViewById<EditText>(R.id.firstName)
         lastName = view.findViewById<EditText>(R.id.lastName)
+        codeVerification = view.findViewById<EditText>(R.id.code)
         telephone = view.findViewById(R.id.phone_number)
         driverViewModel = DriverViewModel()
+        sendCode = view.findViewById <Button>(R.id.SendCode)
+        verification = view.findViewById <Button>(R.id.verifaction)
 
     }
 
