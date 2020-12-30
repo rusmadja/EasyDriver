@@ -16,6 +16,7 @@ class TravelRepo {
                 val listData = mutableListOf<Travel>()
                 for (snapshot: DataSnapshot in datasnapshot.children) {
                     val travel = snapshot.getValue(Travel::class.java)
+
                     listData.add(travel!!)
                 }
                 dataMutable.value = listData
@@ -28,3 +29,7 @@ class TravelRepo {
         return dataMutable
     }
 }
+
+//if (travel != null) {
+//    travel.Date_depart=snapshot.key.toString()
+//}

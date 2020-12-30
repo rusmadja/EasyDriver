@@ -1,12 +1,16 @@
 package com.reouven.easydriver
 
 
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.PhoneAuthCredential
 
 class DriverViewModel() : ViewModel() {
     private val DriverRepo = DriverRepository()
     
     fun SignInDriver(mail: String, password: String) = DriverRepo.SignIn(mail, password)
+    fun signInWithCredential(credential: PhoneAuthCredential) =DriverRepo.signInWithCredential(credential)
+
 
     fun resetPassword(mail: String): Boolean {
         if (mail != "") {
@@ -20,7 +24,7 @@ class DriverViewModel() : ViewModel() {
     fun updateDriver(driver: Driver) {
         DriverRepo.UpdateDriverInFirebase(driver)
     }
-    fun Storedriver (mail: String, password: String)= DriverRepo.StoreDriver(mail, password)
+    fun Storedriver (mail: String, password: String, activity: FragmentActivity?)= DriverRepo.StoreDriver(mail, password)
 
     fun setdriverInFirebase(driver: Driver) {
 
@@ -34,4 +38,6 @@ class DriverViewModel() : ViewModel() {
         DriverRepo.setDriverInFirebase(hsmap, driver.id)
 
     }
+
+
 }

@@ -1,13 +1,11 @@
 package com.reouven.easydriver
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -26,8 +24,7 @@ class Signin : Fragment() {
     var auth = FirebaseAuth.getInstance()
     private lateinit var mAuth: FirebaseAuth
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
-    //private lateinit var phoneNumber: EditText
-    //private lateinit var code: EditText
+
     private lateinit var storedVerificationId: String
 
     lateinit var mail: EditText
@@ -41,6 +38,7 @@ class Signin : Fragment() {
     lateinit var driverViewModel: DriverViewModel
     lateinit var sendCode : Button
     lateinit var verification : Button
+    lateinit var Submit : Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,6 +57,61 @@ class Signin : Fragment() {
 
         setAllButtonClick(view)
 
+
+    }
+
+    private fun setAllButtonClick(view: View) {
+
+        Submit.setOnClickListener {
+
+            if (checkIfAllNotEmpty()) {
+                createemail(mail.text.toString(), password.text.toString())
+            } else {
+                Toast.makeText(
+                    this.activity,
+                    "please enter data",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+
+        sendCode.setOnClickListener {
+            if(telephone.text.toString() != "")
+                startPhoneNumberVerification()
+                codeVerification.visibility = view.visibility
+                verification.visibility = view.visibility
+                sendCode.visibility=View.GONE
+
+        }
+
+        verification.setOnClickListener {
+            //faire lauthntification
+            verifyPhoneNumberWithCode(storedVerificationId)
+        }
+
+        view.findViewById<Button>(R.id.SGoToLogIn).setOnClickListener {
+            findNavController().navigate(R.id.action_signin_to_loginFragment)
+        }
+
+        view.findViewById<EditText>(R.id.phone_number).setOnClickListener{
+            sendCode.visibility = view.visibility
+
+        }
+
+    }
+
+    private fun initAllData(view: View) {
+        mail = view.findViewById<EditText>(R.id.mail)
+        password = view.findViewById<EditText>(R.id.password)
+        firstName = view.findViewById<EditText>(R.id.firstName)
+        lastName = view.findViewById<EditText>(R.id.lastName)
+        codeVerification = view.findViewById<EditText>(R.id.code)
+        telephone = view.findViewById(R.id.phone_number)
+        driverViewModel = DriverViewModel()
+        sendCode = view.findViewById <Button>(R.id.SendCode)
+        verification = view.findViewById <Button>(R.id.verifaction)
+        Submit = view.findViewById <Button>(R.id.SGoToOrder)
+
         mAuth = FirebaseAuth.getInstance()
 
         auth = Firebase.auth
@@ -67,6 +120,7 @@ class Signin : Fragment() {
 
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
 
+                Toast.makeText(this@Signin.requireActivity(), "code verifier  ", Toast.LENGTH_SHORT).show()
                 signInWithPhoneAuthCredential(credential)
             }
 
@@ -86,58 +140,10 @@ class Signin : Fragment() {
                 token: PhoneAuthProvider.ForceResendingToken
             ) {
                 storedVerificationId = verificationId
-                Toast.makeText(this@Signin.requireActivity(), "$verificationId ", Toast.LENGTH_LONG).show()
+                //Toast.makeText(this@Signin.requireActivity(), "$verificationId ", Toast.LENGTH_LONG).show()
 
             }
         }
-    }
-
-    private fun setAllButtonClick(view: View) {
-
-        view.findViewById<Button>(R.id.SGoToOrder).setOnClickListener {
-
-            if (checkIfAllNotEmpty()) {
-                createemail(mail.text.toString(), password.text.toString())
-            } else {
-                Toast.makeText(
-                    this.activity,
-                    "please enter data",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-        }
-
-        view.findViewById<Button>(R.id.SGoToLogIn).setOnClickListener {
-            findNavController().navigate(R.id.action_signin_to_loginFragment)
-        }
-
-        view.findViewById<EditText>(R.id.phone_number).setOnClickListener{
-            sendCode.visibility = view.visibility
-        }
-        sendCode.setOnClickListener {
-            // ajouter la verif ici
-
-            startPhoneNumberVerification()
-            codeVerification.visibility = view.visibility
-            verification.visibility = view.visibility
-
-        }
-        verification.setOnClickListener {
-            //faire lauthntification
-            verifyPhoneNumberWithCode(storedVerificationId)
-        }
-    }
-
-    private fun initAllData(view: View) {
-        mail = view.findViewById<EditText>(R.id.mail)
-        password = view.findViewById<EditText>(R.id.password)
-        firstName = view.findViewById<EditText>(R.id.firstName)
-        lastName = view.findViewById<EditText>(R.id.lastName)
-        codeVerification = view.findViewById<EditText>(R.id.code)
-        telephone = view.findViewById(R.id.phone_number)
-        driverViewModel = DriverViewModel()
-        sendCode = view.findViewById <Button>(R.id.SendCode)
-        verification = view.findViewById <Button>(R.id.verifaction)
 
     }
 
@@ -150,7 +156,7 @@ class Signin : Fragment() {
 
     private fun createemail(mail: String, password: String) {
 
-        DriverViewModel().Storedriver(mail, password).addOnCompleteListener { task ->
+        DriverViewModel().Storedriver(mail, password,this.activity).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                  driverId = FirebaseAuth.getInstance().uid.toString()
                 Toast.makeText(this.activity, "welcome", Toast.LENGTH_LONG).show()
@@ -201,20 +207,23 @@ class Signin : Fragment() {
         val CODE = codeVerification.text.toString()
         val credential = PhoneAuthProvider.getCredential(verificationId!!, CODE.toString())
         // [END verify_with_code]
+        //Toast.makeText(this.requireActivity(), "$credential", Toast.LENGTH_LONG).show()
+
         signInWithPhoneAuthCredential(credential)
     }
 
 
-
-
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
 
-        auth.signInWithCredential(credential)
+        DriverViewModel().signInWithCredential(credential)
             .addOnCompleteListener(this.requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this.requireActivity(), "task succesfull ", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this.requireActivity(), "task succesfull ", Toast.LENGTH_SHORT).show()
                     //flag=true
                     val user = task.result?.user
+                    Submit.isEnabled=true
+                    verification.isEnabled=false
+                    codeVerification.isEnabled=false
                     // ...
                 } else {
                     // Sign in failed, display a message and update the UI

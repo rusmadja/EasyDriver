@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 class TravelAdapter(private val context: Context) : RecyclerView.Adapter<TravelAdapter.ViewHolder>() {
@@ -46,8 +47,9 @@ class TravelAdapter(private val context: Context) : RecyclerView.Adapter<TravelA
             From.setText(travel.adresse_depart)
             To.setText(travel.adresse_arriver)
             passenger.setText(travel.nb_voyageur)
-            itemView.setOnClickListener {
 
+            itemView.setOnClickListener {
+                Toast.makeText(context,"${travel.toString()}",Toast.LENGTH_LONG).show()
             }
         }
     }
