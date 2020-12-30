@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class TravelAdapter(private val context: Context) : RecyclerView.Adapter<TravelAdapter.ViewHolder>() {
+class TravelAdapterSwipe(private val context: Context) : RecyclerView.Adapter<TravelAdapterSwipe.ViewHolder>() {
 
     private val datalist = mutableListOf<Travel>()
 

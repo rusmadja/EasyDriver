@@ -120,7 +120,7 @@
                 android:textSize="12dp" />
 
             <Button
-                android:id="@+id/LGoToLogIn"
+                android:id="@+id/SGoToLogIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"

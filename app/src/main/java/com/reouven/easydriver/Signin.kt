@@ -60,7 +60,7 @@ class Signin : Fragment() {
             }
         }
 
-        view.findViewById<Button>(R.id.LGoToLogIn).setOnClickListener {
+        view.findViewById<Button>(R.id.SGoToLogIn).setOnClickListener {
             findNavController().navigate(R.id.action_signin_to_loginFragment)
         }
 
@@ -85,7 +85,7 @@ class Signin : Fragment() {
 
     private fun createemail(mail: String, password: String) {
 
-        UserViewModel().StoreUser(mail, password).addOnCompleteListener { task ->
+        DriverViewModel().Storedriver(mail, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                  driverId = FirebaseAuth.getInstance().uid.toString()
                 Toast.makeText(this.activity, "welcome", Toast.LENGTH_LONG).show()
