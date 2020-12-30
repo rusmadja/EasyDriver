@@ -7,15 +7,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.FirebaseException
+import com.google.firebase.FirebaseTooManyRequestsException
+import com.google.firebase.auth.*
 
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import java.util.concurrent.TimeUnit
 
 
 class Signin : Fragment() {
+
+    var auth = FirebaseAuth.getInstance()
+    private lateinit var mAuth: FirebaseAuth
+    private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
+    //private lateinit var phoneNumber: EditText
+    //private lateinit var code: EditText
+    private lateinit var storedVerificationId: String
 
     lateinit var mail: EditText
     lateinit var password: EditText
@@ -46,6 +59,36 @@ class Signin : Fragment() {
 
         setAllButtonClick(view)
 
+        mAuth = FirebaseAuth.getInstance()
+        auth = Firebase.auth
+
+        callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+            override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+
+                signInWithPhoneAuthCredential(credential)
+            }
+
+            override fun onVerificationFailed(e: FirebaseException) {
+
+                if (e is FirebaseAuthInvalidCredentialsException) {
+                    Toast.makeText(this@Signin.requireActivity(), "failed ", Toast.LENGTH_SHORT).show()
+
+                } else if (e is FirebaseTooManyRequestsException) {
+
+                }
+
+            }
+
+            override fun onCodeSent(
+                verificationId: String,
+                token: PhoneAuthProvider.ForceResendingToken
+            ) {
+                storedVerificationId = verificationId
+                Toast.makeText(this@Signin.requireActivity(), "$verificationId ", Toast.LENGTH_LONG).show()
+
+            }
+        }
     }
 
     private fun setAllButtonClick(view: View) {
@@ -73,12 +116,14 @@ class Signin : Fragment() {
         sendCode.setOnClickListener {
             // ajouter la verif ici
 
+            startPhoneNumberVerification()
             codeVerification.visibility = view.visibility
             verification.visibility = view.visibility
-            sendCode.isEnabled = false
+
         }
         verification.setOnClickListener {
             //faire lauthntification
+            verifyPhoneNumberWithCode(storedVerificationId)
         }
     }
 
@@ -134,5 +179,56 @@ class Signin : Fragment() {
             mail.text.toString(),
             telephone.text.toString()
         )
+    }
+    private fun startPhoneNumberVerification() {
+        // [START start_phone_auth]
+        Toast.makeText(this.requireActivity(), "init du phone", Toast.LENGTH_SHORT).show()
+        var phone = telephone.text.toString()
+        val options = PhoneAuthOptions.newBuilder(auth)
+            .setPhoneNumber(phone.toString())       // Phone number to verify
+            .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+            .setActivity(this.requireActivity())                 // Activity (for callback binding)
+            .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks
+            .build()
+        PhoneAuthProvider.verifyPhoneNumber(options)
+        // [END start_phone_auth]
+
+    }
+
+    private fun verifyPhoneNumberWithCode(verificationId: String?) {
+        // [START verify_with_code]
+        val CODE = codeVerification.text.toString()
+        val credential = PhoneAuthProvider.getCredential(verificationId!!, CODE.toString())
+        // [END verify_with_code]
+        signInWithPhoneAuthCredential(credential)
+    }
+
+
+
+
+    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
+
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this.requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this.requireActivity(), "task succesfull ", Toast.LENGTH_SHORT).show()
+                    //flag=true
+                    val user = task.result?.user
+                    // ...
+                } else {
+                    // Sign in failed, display a message and update the UI
+                    //flag=false
+                    Toast.makeText(this.requireActivity(), "task else ", Toast.LENGTH_SHORT).show()
+
+                    if (task.exception is FirebaseAuthInvalidCredentialsException) {
+                        // The verification code entered was invalid
+                        //flag=false
+                        Toast.makeText(this.requireActivity(), "task exception ", Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+            }
+
+        //return flag
     }
 }

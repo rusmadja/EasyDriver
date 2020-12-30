@@ -110,17 +110,6 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_margin="5dp">
-
-                <Button
-                    android:id="@+id/SendCode"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:layout_margin="15dp"
-                    android:background="@drawable/button_next"
-                    android:text="send code verification"
-                    android:textColor="#FFFF"
-                    android:textSize="12dp"
-                    android:visibility="gone"/>
                 <Button
                     android:id="@+id/verifaction"
                     android:layout_width="150dp"
@@ -138,6 +127,17 @@
                     android:visibility="gone">
 
                 </EditText>
+                <Button
+                    android:id="@+id/SendCode"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/button_next"
+                    android:text="send code verification"
+                    android:textColor="#FFFF"
+                    android:textSize="12dp"
+                    android:visibility="gone"/>
+
 
             </LinearLayout>
 
