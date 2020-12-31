@@ -20,6 +20,7 @@ class TravelRepo {
                     listData.add(travel!!)
                 }
                 dataMutable.value = listData
+
             }
 
             override fun onCancelled(error: DatabaseError) {
