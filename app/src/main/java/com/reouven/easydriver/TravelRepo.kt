@@ -22,7 +22,6 @@ class TravelRepo {
                 dataMutable.value = listData
 
             }
-
             override fun onCancelled(error: DatabaseError) {
 
             }
