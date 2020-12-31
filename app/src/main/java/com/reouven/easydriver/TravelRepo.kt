@@ -27,6 +27,7 @@ class TravelRepo {
             }
         })
         return dataMutable
+
     }
     fun getFreeTravel(): LiveData<MutableList<Travel>> {
         val dataMutable = MutableLiveData<MutableList<Travel>>()
