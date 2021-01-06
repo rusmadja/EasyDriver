@@ -6,15 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
-class TravelAdapter(private val context: Context) : RecyclerView.Adapter<TravelAdapter.ViewHolder>() {
+class TravelAdapter(private val context: Context, driverId: String) : RecyclerView.Adapter<TravelAdapter.ViewHolder>() {
 
     private val datalist = mutableListOf<Travel>()
-
+    var driverId = driverId
     fun setListData(data:MutableList<Travel>){
         datalist.clear()
         datalist.addAll(data)
@@ -34,14 +33,19 @@ class TravelAdapter(private val context: Context) : RecyclerView.Adapter<TravelA
     override fun getItemCount(): Int {
         return datalist.size
     }
-    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+
+
+
+    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
+    {
+
         var departure = itemView.findViewById<TextView>(R.id.datefrom)
         var arrival = itemView.findViewById<TextView>(R.id.dateTo)
         var From = itemView.findViewById<TextView>(R.id.adresseFrom)
         var To = itemView.findViewById<TextView>(R.id.adresseTo)
         var passenger = itemView.findViewById<TextView>(R.id.passenger)
         var buttonValider = itemView.findViewById<Button>(R.id.accepter)
-        var buttonfinish = itemView.findViewById<Button>(R.id.finish)
+
 
         fun bindView(travel:Travel){
 
@@ -55,8 +59,12 @@ class TravelAdapter(private val context: Context) : RecyclerView.Adapter<TravelA
             itemView.setOnClickListener {
                 Toast.makeText(context,"${travel.toString()}",Toast.LENGTH_LONG).show()
             }
-            buttonValider.setOnClickListener {  }
-            buttonfinish.setOnClickListener {  }
+            buttonValider.setOnClickListener {
+
+                TravelViewModel().UpdateToReceive(travel)
+                TravelViewModel().UpdateDriverId(travel,driverId)
+            }
+
         }
     }
 

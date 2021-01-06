@@ -10,13 +10,15 @@ class TravelRepo {
     fun getTravelData(): LiveData<MutableList<Travel>> {
         val dataMutable = MutableLiveData<MutableList<Travel>>()
         var database = FirebaseDatabase.getInstance().getReference()
-        var query : Query = database.child("Travel").orderByChild("posted_at")
+        var query : Query = database.child("Travel")
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(datasnapshot: DataSnapshot) {
                 val listData = mutableListOf<Travel>()
                 for (snapshot: DataSnapshot in datasnapshot.children) {
                     val travel = snapshot.getValue(Travel::class.java)
-
+                    if (travel != null) {
+                        travel.travelId = snapshot.key.toString()
+                    }
                     listData.add(travel!!)
                 }
                 dataMutable.value = listData
@@ -32,13 +34,15 @@ class TravelRepo {
     fun getFreeTravel(): LiveData<MutableList<Travel>> {
         val dataMutable = MutableLiveData<MutableList<Travel>>()
         var database = FirebaseDatabase.getInstance().getReference()
-        var query: Query = database.child("Travel").equalTo("IsFree","Status")
+        var query: Query = database.child("Travel").orderByChild("Status").equalTo("SEND")
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(datasnapshot: DataSnapshot) {
                 val listData = mutableListOf<Travel>()
                 for (snapshot: DataSnapshot in datasnapshot.children) {
                     val travel = snapshot.getValue(Travel::class.java)
-
+                    if (travel != null) {
+                        travel.travelId = snapshot.key.toString()
+                    }
                     listData.add(travel!!)
                 }
                 dataMutable.value = listData
@@ -50,8 +54,15 @@ class TravelRepo {
         })
         return dataMutable
     }
+    fun UpdateToReceive(travel:Travel) {
+        var reference = FirebaseDatabase.getInstance().getReference("Travel")
+        reference.child(travel.travelId).child("Status").setValue("RECEIVE")
     }
 
-//if (travel != null) {
-//    travel.Date_depart=snapshot.key.toString()
-//}
+        fun UpdateDriverId(travel:Travel,driverId: String) {
+        var reference = FirebaseDatabase.getInstance().getReference("Travel")
+        reference.child(travel.travelId).child("driverId").setValue(driverId)
+
+    }
+}
+

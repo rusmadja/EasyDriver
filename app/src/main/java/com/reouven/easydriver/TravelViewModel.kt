@@ -8,9 +8,17 @@ class TravelViewModel : ViewModel() {
     val repo = TravelRepo()
     fun fetchUserData(): LiveData<MutableList<Travel>> {
         val mutableData = MutableLiveData<MutableList<Travel>>()
-        repo.getTravelData().observeForever { userlist ->
+        repo.getFreeTravel().observeForever { userlist ->
             mutableData.value = userlist
         }
         return mutableData
+    }
+    fun UpdateToReceive(travel:Travel)
+    {
+        repo.UpdateToReceive(travel)
+    }
+
+    fun UpdateDriverId(travel:Travel,driverId: String) {
+        repo.UpdateDriverId(travel,driverId)
     }
 }

@@ -1,11 +1,9 @@
 package com.reouven.easydriver
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -13,12 +11,16 @@ import androidx.recyclerview.widget.RecyclerView
 class ContextAppActivity : AppCompatActivity() {
     lateinit var adapter: TravelAdapter
     lateinit var recyclerView: RecyclerView
+    lateinit var driverId :String
+
     val viewModel: TravelViewModel by lazy { ViewModelProviders.of(this).get(TravelViewModel::class.java) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_context_app)
+        val intent = intent
+        driverId = intent.getStringExtra("Driverid")
 
-        adapter = TravelAdapter(this)
+        adapter = TravelAdapter(this,driverId)
 
         recyclerView = findViewById(R.id.recycler)
         recyclerView.layoutManager = LinearLayoutManager(this)
