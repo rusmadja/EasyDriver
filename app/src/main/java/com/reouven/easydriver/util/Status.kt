@@ -1,4 +1,4 @@
-package com.reouven.easydriver
+package com.reouven.easydriver.util
 
 enum class Status {
     SEND,

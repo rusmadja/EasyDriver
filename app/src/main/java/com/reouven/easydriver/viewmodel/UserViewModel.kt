@@ -1,11 +1,9 @@
-package com.reouven.easydriver
+package com.reouven.easydriver.viewmodel
 
 
-import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModel
-import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
+import com.reouven.easydriver.entity.User
+import com.reouven.easydriver.repository.UserRepository
 
 class UserViewModel() : ViewModel() {
     private val UserRepo = UserRepository()

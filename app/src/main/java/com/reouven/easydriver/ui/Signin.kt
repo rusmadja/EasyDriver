@@ -1,4 +1,4 @@
-package com.reouven.easydriver
+package com.reouven.easydriver.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,6 +16,9 @@ import com.google.firebase.auth.*
 
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.reouven.easydriver.R
+import com.reouven.easydriver.entity.Driver
+import com.reouven.easydriver.viewmodel.DriverViewModel
 import java.util.concurrent.TimeUnit
 
 

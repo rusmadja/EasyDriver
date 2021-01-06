@@ -1,4 +1,4 @@
-package com.reouven.easydriver
+package com.reouven.easydriver.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +11,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.reouven.easydriver.viewmodel.DriverViewModel
+import com.reouven.easydriver.R
+import com.reouven.easydriver.viewmodel.UserViewModel
 
 
 class LoginFragment : Fragment() {

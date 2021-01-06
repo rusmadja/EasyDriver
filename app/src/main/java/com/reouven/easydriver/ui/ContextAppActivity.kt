@@ -1,4 +1,4 @@
-package com.reouven.easydriver
+package com.reouven.easydriver.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.reouven.easydriver.R
+import com.reouven.easydriver.adapter.TravelAdapter
+import com.reouven.easydriver.viewmodel.TravelViewModel
 
 
 class ContextAppActivity : AppCompatActivity() {

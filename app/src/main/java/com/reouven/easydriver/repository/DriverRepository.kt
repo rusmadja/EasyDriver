@@ -1,10 +1,11 @@
-package com.reouven.easydriver
+package com.reouven.easydriver.repository
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.reouven.easydriver.entity.Driver
 
 class DriverRepository() {
     val reference = FirebaseDatabase.getInstance().getReference("Driver")

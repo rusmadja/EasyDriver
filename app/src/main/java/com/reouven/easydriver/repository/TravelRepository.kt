@@ -1,11 +1,12 @@
-package com.reouven.easydriver
+package com.reouven.easydriver.repository
 
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.*
+import com.reouven.easydriver.entity.Travel
 
-class TravelRepo {
+class TravelRepository {
 
     fun getTravelData(): LiveData<MutableList<Travel>> {
         val dataMutable = MutableLiveData<MutableList<Travel>>()
@@ -54,12 +55,12 @@ class TravelRepo {
         })
         return dataMutable
     }
-    fun UpdateToReceive(travel:Travel) {
+    fun UpdateToReceive(travel: Travel) {
         var reference = FirebaseDatabase.getInstance().getReference("Travel")
         reference.child(travel.travelId).child("Status").setValue("RECEIVE")
     }
 
-        fun UpdateDriverId(travel:Travel,driverId: String) {
+        fun UpdateDriverId(travel: Travel, driverId: String) {
         var reference = FirebaseDatabase.getInstance().getReference("Travel")
         reference.child(travel.travelId).child("driverId").setValue(driverId)
 

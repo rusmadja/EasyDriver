@@ -1,7 +1,8 @@
-package com.reouven.easydriver
+package com.reouven.easydriver.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.reouven.easydriver.R
 
 class AuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

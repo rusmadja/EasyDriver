@@ -1,7 +1,8 @@
-package com.reouven.easydriver
+package com.reouven.easydriver.repository
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.reouven.easydriver.entity.User
 
 class UserRepository() {
     val reference = FirebaseDatabase.getInstance().getReference("User")

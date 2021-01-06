@@ -1,9 +1,11 @@
-package com.reouven.easydriver
+package com.reouven.easydriver.viewmodel
 
 
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.PhoneAuthCredential
+import com.reouven.easydriver.entity.Driver
+import com.reouven.easydriver.repository.DriverRepository
 
 class DriverViewModel() : ViewModel() {
     private val DriverRepo = DriverRepository()

@@ -1,4 +1,4 @@
-package com.reouven.easydriver
+package com.reouven.easydriver.entity
 
 class Travel (
     val userId:String ="",

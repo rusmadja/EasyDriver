@@ -1,7 +1,7 @@
-package com.reouven.easydriver
+package com.reouven.easydriver.entity
 
 
-data class Driver(
+data class User(
     val id: String,
     val firstName: String = "Default Name",
     val lastName: String = "Default Name",
