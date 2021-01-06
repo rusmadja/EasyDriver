@@ -17,7 +17,14 @@
 
             android:orientation="vertical">
 
-
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animation_view"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@color/Clickable_Primary"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="39995-check-list-animation.json"
+                app:lottie_loop="true" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
