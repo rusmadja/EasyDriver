@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
@@ -63,16 +64,16 @@ class TravelAdapter(fragment: Fragment,driverId: String?) : RecyclerView.Adapter
 
 
             itemView.setOnClickListener {
-                // diriger vers  info complete
-                findNavController(fragment).navigate(R.id.action_appMainFragment_to_infoTravelFragment)
+                val bundle = bundleOf("travel" to travel.toString())
+                findNavController(fragment).navigate(R.id.action_appMainFragment_to_infoTravelFragment,bundle)
             }
             buttonValider.setOnClickListener {
                 // ajouter ici nav vers reservation
                 TravelViewModel().UpdateToReceive(travel)
                 if (driverId != null)
                     TravelViewModel().UpdateDriverId(travel,driverId!!)
-
-                findNavController(fragment).navigate(R.id.action_appMainFragment_to_inRoadFragment)
+                val bundle = bundleOf("travel" to travel.toString())
+                findNavController(fragment).navigate(R.id.action_appMainFragment_to_inRoadFragment,bundle)
             }
 
         }

@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_appMainFragment_to_inRoadFragment"
             app:destination="@id/inRoadFragment" />
+        <action
+            android:id="@+id/action_appMainFragment_to_driverHistoriyTravelFragment"
+            app:destination="@id/driverHistoriyTravelFragment" />
     </fragment>
     <fragment
         android:id="@+id/infoTravelFragment"
@@ -25,6 +28,9 @@
         <action
             android:id="@+id/action_infoTravelFragment_to_appMainFragment"
             app:destination="@id/appMainFragment" />
+        <action
+            android:id="@+id/action_infoTravelFragment_to_driverHistoriyTravelFragment"
+            app:destination="@id/driverHistoriyTravelFragment" />
     </fragment>
     <fragment
         android:id="@+id/inRoadFragment"
@@ -34,5 +40,23 @@
         <action
             android:id="@+id/action_inRoadFragment_to_appMainFragment"
             app:destination="@id/appMainFragment" />
+        <action
+            android:id="@+id/action_inRoadFragment_to_driverHistoriyTravelFragment"
+            app:destination="@id/driverHistoriyTravelFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/driverHistoriyTravelFragment"
+        android:name="com.reouven.easydriver.DriverHistoriyTravelFragment"
+        android:label="fragment_driver_historiy_travel"
+        tools:layout="@layout/fragment_driver_historiy_travel" >
+        <action
+            android:id="@+id/action_driverHistoriyTravelFragment_to_appMainFragment"
+            app:destination="@id/appMainFragment" />
+        <action
+            android:id="@+id/action_driverHistoriyTravelFragment_to_inRoadFragment"
+            app:destination="@id/inRoadFragment" />
+        <action
+            android:id="@+id/action_driverHistoriyTravelFragment_to_infoTravelFragment"
+            app:destination="@id/infoTravelFragment" />
     </fragment>
 </navigation>

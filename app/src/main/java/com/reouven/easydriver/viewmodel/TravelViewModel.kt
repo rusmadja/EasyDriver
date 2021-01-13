@@ -15,6 +15,13 @@ class TravelViewModel : ViewModel() {
         }
         return mutableData
     }
+    fun fetchUserDatabyDriverid(driverId: String): LiveData<MutableList<Travel>> {
+        val mutableData = MutableLiveData<MutableList<Travel>>()
+        repo.getTravelDatabyDriverId(driverId).observeForever { userlist ->
+            mutableData.value = userlist
+        }
+        return mutableData
+    }
     fun UpdateToReceive(travel: Travel)
     {
         repo.UpdateToReceive(travel)
@@ -22,5 +29,16 @@ class TravelViewModel : ViewModel() {
 
     fun UpdateDriverId(travel: Travel, driverId: String) {
         repo.UpdateDriverId(travel,driverId)
+    }
+
+    fun UpdateToSEND(travel: Travel) {
+        repo.UpdateToSEND(travel)
+    }
+
+    fun UpdateToONROAD(travel: Travel) {
+        repo.UpdateToONROAD(travel)
+    }
+    fun UpdateToCLOSE(travel: Travel) {
+        repo.UpdateToCLOSE(travel)
     }
 }

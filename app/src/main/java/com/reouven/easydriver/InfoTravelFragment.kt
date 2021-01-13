@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 
 class InfoTravelFragment : Fragment() {
@@ -20,8 +21,14 @@ class InfoTravelFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        var value = arguments?.getString("travel").toString()
+
+        view.findViewById<TextView>(R.id.all_info).setText(value)
+
         view.findViewById<Button>(R.id.returnToAllData).setOnClickListener {
             findNavController().navigate(R.id.action_infoTravelFragment_to_appMainFragment)
         }
     }
+
 }

@@ -4,23 +4,26 @@ package com.reouven.easydriver.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.reouven.easydriver.R
 import com.reouven.easydriver.entity.Travel
+import com.reouven.easydriver.viewmodel.TravelViewModel
 
-class TravelAdapterSwipe :RecyclerView.Adapter<TravelAdapterSwipe.ViewHolder>(){
-
-
+class TravelAdapterSwipe(fragment: Fragment, driverId: String?)  :RecyclerView.Adapter<TravelAdapterSwipe.ViewHolder>(){
     private val datalist = mutableListOf<Travel>()
-
+    var driverId = driverId
+    var fragment = fragment
     fun setListData(data:MutableList<Travel>){
         datalist.clear()
         datalist.addAll(data)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val  view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.travel_row,parent,false)
+        val  view = LayoutInflater.from(parent.context).inflate(R.layout.travel_row,parent,false)
 
 
         return ViewHolder(view)
@@ -34,20 +37,19 @@ class TravelAdapterSwipe :RecyclerView.Adapter<TravelAdapterSwipe.ViewHolder>(){
     override fun getItemCount(): Int {
         return datalist.size
     }
-    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        var departure :TextView
-        var  arrival :TextView
-        var From :TextView
-        var To :TextView
-        var passenger :TextView
-        init {
-             departure = itemView.findViewById< TextView>(R.id.datefrom)
-             arrival    = itemView.findViewById<TextView>(R.id.dateTo)
-             From       = itemView.findViewById<TextView>(R.id.adresseFrom)
-             To         = itemView.findViewById<TextView>(R.id.adresseTo)
-             passenger = itemView.findViewById< TextView>(R.id.passenger)
 
-        }
+
+
+    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
+    {
+
+        var departure = itemView.findViewById<TextView>(R.id.datefrom)
+        var arrival = itemView.findViewById<TextView>(R.id.dateTo)
+        var From = itemView.findViewById<TextView>(R.id.adresseFrom)
+        var To = itemView.findViewById<TextView>(R.id.adresseTo)
+        var passenger = itemView.findViewById<TextView>(R.id.passenger)
+        var buttonValider = itemView.findViewById<Button>(R.id.accepter)
+
 
         fun bindView(travel: Travel){
 
@@ -56,9 +58,22 @@ class TravelAdapterSwipe :RecyclerView.Adapter<TravelAdapterSwipe.ViewHolder>(){
             From.setText(travel.adresse_depart)
             To.setText(travel.adresse_arriver)
             passenger.setText(travel.nb_voyageur)
-            itemView.setOnClickListener {
 
+
+            itemView.setOnClickListener {
+                val bundle = bundleOf("travel" to travel.toString())
+                NavHostFragment.findNavController(fragment).navigate(R.id.action_driverHistoriyTravelFragment_to_infoTravelFragment,bundle)
             }
+            buttonValider.setOnClickListener {
+                // ajouter ici nav vers reservation
+                TravelViewModel().UpdateToReceive(travel)
+                if (driverId != null)
+                    TravelViewModel().UpdateDriverId(travel,driverId!!)
+                val bundle = bundleOf("travel" to travel.toString())
+                NavHostFragment.findNavController(fragment)
+                    .navigate(R.id.action_driverHistoriyTravelFragment_to_inRoadFragment,bundle)
+            }
+
         }
     }
 

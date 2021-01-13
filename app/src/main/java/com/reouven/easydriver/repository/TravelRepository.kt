@@ -33,6 +33,33 @@ class TravelRepository {
         return dataMutable
 
     }
+
+    fun getTravelDatabyDriverId(driverId: String): LiveData<MutableList<Travel>> {
+        val dataMutable = MutableLiveData<MutableList<Travel>>()
+        var database = FirebaseDatabase.getInstance().getReference()
+        var query : Query = database.child("Travel").orderByChild("driverId").equalTo(driverId)
+        query.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(datasnapshot: DataSnapshot) {
+                val listData = mutableListOf<Travel>()
+                for (snapshot: DataSnapshot in datasnapshot.children) {
+                    val travel = snapshot.getValue(Travel::class.java)
+                    if (travel != null) {
+                        travel.travelId = snapshot.key.toString()
+                    }
+                    listData.add(travel!!)
+                }
+                listData.reverse()
+                dataMutable.value = listData
+
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+        return dataMutable
+
+    }
+
     fun getFreeTravel(): LiveData<MutableList<Travel>> {
         val dataMutable = MutableLiveData<MutableList<Travel>>()
         var database = FirebaseDatabase.getInstance().getReference()
@@ -65,6 +92,21 @@ class TravelRepository {
         var reference = FirebaseDatabase.getInstance().getReference("Travel")
         reference.child(travel.travelId).child("driverId").setValue(driverId)
 
+    }
+
+    fun UpdateToSEND(travel: Travel) {
+        var reference = FirebaseDatabase.getInstance().getReference("Travel")
+        reference.child(travel.travelId).child("Status").setValue("SEND")
+        reference.child(travel.travelId).child("driverId").setValue("null")
+    }
+
+    fun UpdateToONROAD(travel: Travel) {
+        var reference = FirebaseDatabase.getInstance().getReference("Travel")
+        reference.child(travel.travelId).child("Status").setValue("ONROAD")
+    }
+    fun UpdateToCLOSE(travel: Travel) {
+        var reference = FirebaseDatabase.getInstance().getReference("Travel")
+        reference.child(travel.travelId).child("Status").setValue("CLOSE")
     }
 }
 

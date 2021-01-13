@@ -3,25 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InfoTravelFragment">
+    tools:context=".AdminDashboardFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-<!--mettre ici le darwable croix-->
         <Button
-            android:id="@+id/returnToAllData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_add_black_24dp" />
-
-        <TextView
-            android:id="@+id/all_info"
+            android:id="@+id/goToHistory"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="ici mettre info de travel si il veut plus dinfo" />
+            android:layout_height="wrap_content"
+            android:text="Go to history"/>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleradmin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
+
 
 </FrameLayout>
