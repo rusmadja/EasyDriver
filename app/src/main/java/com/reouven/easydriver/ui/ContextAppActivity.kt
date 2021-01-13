@@ -21,7 +21,7 @@ class ContextAppActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_context_app)
         val intent = intent
-        driverId = intent.getStringExtra("Driverid")
+       driverId = intent.getStringExtra("Driverid")
 
         adapter = TravelAdapter(this,driverId)
 

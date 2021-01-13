@@ -1,7 +1,6 @@
 package com.reouven.easydriver.adapter
 
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.reouven.easydriver.R
 import com.reouven.easydriver.entity.Travel
 
-class TravelAdapterSwipe(private val context: Context) : RecyclerView.Adapter<TravelAdapterSwipe.ViewHolder>() {
+class TravelAdapterSwipe :RecyclerView.Adapter<TravelAdapterSwipe.ViewHolder>(){
+
 
     private val datalist = mutableListOf<Travel>()
 
@@ -19,7 +19,8 @@ class TravelAdapterSwipe(private val context: Context) : RecyclerView.Adapter<Tr
         datalist.addAll(data)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val  view = LayoutInflater.from(context).inflate(R.layout.travel_row,parent,false)
+        val  view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.travel_row,parent,false)
 
 
         return ViewHolder(view)
@@ -34,11 +35,19 @@ class TravelAdapterSwipe(private val context: Context) : RecyclerView.Adapter<Tr
         return datalist.size
     }
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        var departure = itemView.findViewById<TextView>(R.id.datefrom)
-        var arrival = itemView.findViewById<TextView>(R.id.dateTo)
-        var From = itemView.findViewById<TextView>(R.id.adresseFrom)
-        var To = itemView.findViewById<TextView>(R.id.adresseTo)
-        var passenger = itemView.findViewById<TextView>(R.id.passenger)
+        var departure :TextView
+        var  arrival :TextView
+        var From :TextView
+        var To :TextView
+        var passenger :TextView
+        init {
+             departure = itemView.findViewById< TextView>(R.id.datefrom)
+             arrival    = itemView.findViewById<TextView>(R.id.dateTo)
+             From       = itemView.findViewById<TextView>(R.id.adresseFrom)
+             To         = itemView.findViewById<TextView>(R.id.adresseTo)
+             passenger = itemView.findViewById< TextView>(R.id.passenger)
+
+        }
 
         fun bindView(travel: Travel){
 
