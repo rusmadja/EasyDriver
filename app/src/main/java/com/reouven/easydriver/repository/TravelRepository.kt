@@ -22,6 +22,7 @@ class TravelRepository {
                     }
                     listData.add(travel!!)
                 }
+                listData.reverse()
                 dataMutable.value = listData
 
             }
@@ -46,6 +47,7 @@ class TravelRepository {
                     }
                     listData.add(travel!!)
                 }
+                listData.reverse()
                 dataMutable.value = listData
             }
 
@@ -59,8 +61,7 @@ class TravelRepository {
         var reference = FirebaseDatabase.getInstance().getReference("Travel")
         reference.child(travel.travelId).child("Status").setValue("RECEIVE")
     }
-
-        fun UpdateDriverId(travel: Travel, driverId: String) {
+    fun UpdateDriverId(travel: Travel, driverId: String) {
         var reference = FirebaseDatabase.getInstance().getReference("Travel")
         reference.child(travel.travelId).child("driverId").setValue(driverId)
 

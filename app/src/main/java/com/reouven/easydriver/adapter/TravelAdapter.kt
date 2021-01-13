@@ -1,28 +1,31 @@
 package com.reouven.easydriver.adapter
 
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.reouven.easydriver.R
 import com.reouven.easydriver.entity.Travel
 import com.reouven.easydriver.viewmodel.TravelViewModel
 
-class TravelAdapter(private val context: Context, driverId: String) : RecyclerView.Adapter<TravelAdapter.ViewHolder>() {
+
+class TravelAdapter(fragment: Fragment,driverId: String?) : RecyclerView.Adapter<TravelAdapter.ViewHolder>() {
 
     private val datalist = mutableListOf<Travel>()
     var driverId = driverId
+    var fragment = fragment
     fun setListData(data:MutableList<Travel>){
         datalist.clear()
         datalist.addAll(data)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val  view = LayoutInflater.from(context).inflate(R.layout.travel_row,parent,false)
+        val  view = LayoutInflater.from(parent.context).inflate(R.layout.travel_row,parent,false)
 
 
         return ViewHolder(view)
@@ -60,12 +63,16 @@ class TravelAdapter(private val context: Context, driverId: String) : RecyclerVi
 
 
             itemView.setOnClickListener {
-                Toast.makeText(context,"${travel.toString()}",Toast.LENGTH_LONG).show()
+                // diriger vers  info complete
+                findNavController(fragment).navigate(R.id.action_appMainFragment_to_infoTravelFragment)
             }
             buttonValider.setOnClickListener {
-
+                // ajouter ici nav vers reservation
                 TravelViewModel().UpdateToReceive(travel)
-                TravelViewModel().UpdateDriverId(travel,driverId)
+                if (driverId != null)
+                    TravelViewModel().UpdateDriverId(travel,driverId!!)
+
+                findNavController(fragment).navigate(R.id.action_appMainFragment_to_inRoadFragment)
             }
 
         }

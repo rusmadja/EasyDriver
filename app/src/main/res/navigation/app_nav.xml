@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_nav"
+    app:startDestination="@id/appMainFragment">
+
+    <fragment
+        android:id="@+id/appMainFragment"
+        android:name="com.reouven.easydriver.AppMainFragment"
+        android:label="fragment_app_main"
+        tools:layout="@layout/fragment_app_main" >
+        <action
+            android:id="@+id/action_appMainFragment_to_infoTravelFragment"
+            app:destination="@id/infoTravelFragment" />
+        <action
+            android:id="@+id/action_appMainFragment_to_inRoadFragment"
+            app:destination="@id/inRoadFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoTravelFragment"
+        android:name="com.reouven.easydriver.InfoTravelFragment"
+        android:label="fragment_info_travel"
+        tools:layout="@layout/fragment_info_travel" >
+        <action
+            android:id="@+id/action_infoTravelFragment_to_appMainFragment"
+            app:destination="@id/appMainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/inRoadFragment"
+        android:name="com.reouven.easydriver.InRoadFragment"
+        android:label="fragment_in_road"
+        tools:layout="@layout/fragment_in_road" >
+        <action
+            android:id="@+id/action_inRoadFragment_to_appMainFragment"
+            app:destination="@id/appMainFragment" />
+    </fragment>
+</navigation>
