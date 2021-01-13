@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_loginFragment_to_contextAppActivity"
             app:destination="@id/contextAppActivity" />
+        <action
+            android:id="@+id/action_loginFragment_to_adminActivity"
+            app:destination="@id/adminActivity" />
     </fragment>
     <fragment
         android:id="@+id/signin"
@@ -28,10 +31,18 @@
         <action
             android:id="@+id/action_signin_to_contextAppActivity"
             app:destination="@id/contextAppActivity" />
+        <action
+            android:id="@+id/action_signin_to_adminActivity"
+            app:destination="@id/adminActivity" />
     </fragment>
     <activity
         android:id="@+id/contextAppActivity"
         android:name="com.reouven.easydriver.ui.ContextAppActivity"
         android:label="activity_context_app"
         tools:layout="@layout/activity_context_app" />
+    <activity
+        android:id="@+id/adminActivity"
+        android:name="com.reouven.easydriver.AdminActivity"
+        android:label="activity_admin"
+        tools:layout="@layout/activity_admin" />
 </navigation>

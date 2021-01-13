@@ -8,10 +8,10 @@ import com.reouven.easydriver.entity.Travel
 
 class TravelRepository {
 
-    fun getTravelData(): LiveData<MutableList<Travel>> {
+    fun getonRoadTravelData(): LiveData<MutableList<Travel>> {
         val dataMutable = MutableLiveData<MutableList<Travel>>()
         var database = FirebaseDatabase.getInstance().getReference()
-        var query : Query = database.child("Travel")
+        var query: Query = database.child("Travel").orderByChild("Status").equalTo("ONROAD")
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(datasnapshot: DataSnapshot) {
                 val listData = mutableListOf<Travel>()
@@ -24,15 +24,15 @@ class TravelRepository {
                 }
                 listData.reverse()
                 dataMutable.value = listData
-
             }
+
             override fun onCancelled(error: DatabaseError) {
 
             }
         })
         return dataMutable
-
     }
+
 
     fun getTravelDatabyDriverId(driverId: String): LiveData<MutableList<Travel>> {
         val dataMutable = MutableLiveData<MutableList<Travel>>()

@@ -49,7 +49,10 @@ class LoginFragment : Fragment() {
 
         view.findViewById<Button>(R.id.LGoToOrder).setOnClickListener {
             if (notEmpty()) {
-                checkUserExist(mail.text.toString(), password.text.toString())
+                if(isAdmin(mail.text.toString(), password.text.toString()))
+                    findNavController().navigate(R.id.action_loginFragment_to_adminActivity)
+                else
+                    checkUserExist(mail.text.toString(), password.text.toString())
             } else {
 
                 Toast.makeText(this.activity, "please enter data", Toast.LENGTH_LONG).show()
@@ -61,6 +64,8 @@ class LoginFragment : Fragment() {
 
         }
     }
+
+    private fun isAdmin(mail: String, password: String): Boolean = mail=="BOSS" && password=="555"
 
     private fun initAll(view: View) {
         mail = view.findViewById<EditText>(R.id.Lmail)

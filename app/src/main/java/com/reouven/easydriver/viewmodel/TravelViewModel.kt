@@ -41,4 +41,12 @@ class TravelViewModel : ViewModel() {
     fun UpdateToCLOSE(travel: Travel) {
         repo.UpdateToCLOSE(travel)
     }
+
+    fun fetchAllUserData(): LiveData<MutableList<Travel>>  {
+        val mutableData = MutableLiveData<MutableList<Travel>>()
+        repo.getonRoadTravelData().observeForever { userlist ->
+            mutableData.value = userlist
+        }
+        return mutableData
+    }
 }
