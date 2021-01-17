@@ -60,13 +60,15 @@ class TravelAdapterHistory(fragment: Fragment, driverId: String?) :
             passenger.setText(travel.nb_voyageur)
 
 
-            itemView.setOnClickListener {
+            /**
+             itemView.setOnClickListener {
                 val bundle = bundleOf("travel" to travel.toString())
                 NavHostFragment.findNavController(fragment).navigate(
                     R.id.action_driverHistoriyTravelFragment2_to_infoTravelFragment2,
                     bundle
                 )
             }
+             */
 
             buttonValider.setOnClickListener {
                 TravelViewModel().UpdateToReceive(travel)

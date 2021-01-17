@@ -45,7 +45,7 @@ class InRoadFragment : Fragment() {
             TravelViewModel().UpdateToCLOSE(travel)
         }
         view.findViewById<Button>(R.id.annule_road).setOnClickListener {
-            findNavController().navigate(R.id.action_inRoadFragment_to_appMainFragment)
+            findNavController().navigate(R.id.action_inRoadFragment2_to_driverHistoriyTravelFragment2)
             TravelViewModel().UpdateToSEND(travel)
         }
     }

@@ -12,12 +12,20 @@ import com.reouven.easydriver.ui.fragment.navFragmentSupport.AppSupportFragmentN
 class ContextAppActivity : AppCompatActivity() {
 
     lateinit var driverId: String
+    lateinit var menu: com.google.android.material.bottomnavigation.BottomNavigationView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_context_app)
 
+        var fragment: Fragment = AppSupportFragmentNewFeed()
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.app_nav_support, fragment)
+            commit()
+
+            menu=findViewById(R.id.bottomNav)
+            menu.selectedItemId=R.id.NewFeeds
 
         val intent = intent
         driverId = intent.getStringExtra("Driverid")

@@ -11,7 +11,7 @@ class TravelViewModel : ViewModel() {
 
     fun fetchClosesTravelData(): LiveData<MutableList<Travel>> {
         val mutableData = MutableLiveData<MutableList<Travel>>()
-        repo.getLiveDataTravelListByStatus("CLOSES").observeForever { userlist ->
+        repo.getLiveDataTravelListByStatus("CLOSE").observeForever { userlist ->
             mutableData.value = userlist
         }
         return mutableData
