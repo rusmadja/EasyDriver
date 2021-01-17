@@ -36,9 +36,6 @@ class DriverHistoriyTravelFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        view.findViewById<Button>(R.id.backToMain).setOnClickListener {
-            findNavController().navigate(R.id.action_driverHistoriyTravelFragment_to_appMainFragment)
-        }
 
 
         adapter = TravelAdapterHistory(this,driverId)
@@ -47,6 +44,7 @@ class DriverHistoriyTravelFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
         observer()
+
 
     }
 

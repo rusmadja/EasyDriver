@@ -32,9 +32,6 @@ class AppMainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
 
-        view.findViewById<Button>(R.id.goToHistory).setOnClickListener {
-            findNavController().navigate(R.id.action_appMainFragment_to_driverHistoriyTravelFragment)
-        }
 
         //initialise ici le driver id
         adapter = TravelAdapter(this,null)
