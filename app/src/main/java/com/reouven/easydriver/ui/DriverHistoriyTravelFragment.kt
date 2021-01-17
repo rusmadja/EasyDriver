@@ -13,13 +13,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.reouven.easydriver.R
-import com.reouven.easydriver.adapter.TravelAdapterSwipe
+import com.reouven.easydriver.adapter.TravelAdapterHistory
 import com.reouven.easydriver.viewmodel.TravelViewModel
 
 class DriverHistoriyTravelFragment : Fragment() {
 
     lateinit var  activity: ContextAppActivity
-    lateinit var adapter: TravelAdapterSwipe
+    lateinit var adapter: TravelAdapterHistory
     lateinit var recyclerView: RecyclerView
     lateinit var driverId :String
     val viewModel: TravelViewModel by lazy { ViewModelProviders.of(this).get(TravelViewModel::class.java) }
@@ -41,8 +41,7 @@ class DriverHistoriyTravelFragment : Fragment() {
         }
 
 
-        //initialise ici le driver id
-        adapter = TravelAdapterSwipe(this,driverId)
+        adapter = TravelAdapterHistory(this,driverId)
 
         recyclerView = view.findViewById(R.id.recycler1)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())

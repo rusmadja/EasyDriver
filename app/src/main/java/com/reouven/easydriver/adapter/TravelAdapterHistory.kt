@@ -14,7 +14,7 @@ import com.reouven.easydriver.R
 import com.reouven.easydriver.entity.Travel
 import com.reouven.easydriver.viewmodel.TravelViewModel
 
-class TravelAdapterSwipe(fragment: Fragment, driverId: String?)  :RecyclerView.Adapter<TravelAdapterSwipe.ViewHolder>(){
+class TravelAdapterHistory(fragment: Fragment, driverId: String?)  :RecyclerView.Adapter<TravelAdapterHistory.ViewHolder>(){
     private val datalist = mutableListOf<Travel>()
     var driverId = driverId
     var fragment = fragment
