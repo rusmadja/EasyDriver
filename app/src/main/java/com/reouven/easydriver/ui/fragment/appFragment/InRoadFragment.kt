@@ -35,6 +35,7 @@ class InRoadFragment : Fragment() {
         travel = Travel(list[0], list[1], list[2], list[3], list[4], list[5], list[6], list[7],list[8],list[9])
         finish = view.findViewById<Button>(R.id.finishRoad)
         start = view.findViewById<Button>(R.id.onRoad)
+
         start.setOnClickListener {
             TravelViewModel().UpdateToONROAD(travel)
             finish.isEnabled = true
