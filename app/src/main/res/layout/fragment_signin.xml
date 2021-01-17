@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.Signin">
+    tools:context=".ui.fragment.authFragment.Signin">
 
     <ScrollView
 
@@ -13,8 +13,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <com.airbnb.lottie.LottieAnimationView
@@ -25,6 +24,7 @@
                 app:lottie_autoPlay="true"
                 app:lottie_fileName="39995-check-list-animation.json"
                 app:lottie_loop="true" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
@@ -112,11 +112,13 @@
                     android:inputType="phone"
                     android:textColor="@color/text_input_color" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
                 <Button
                     android:id="@+id/verifaction"
                     android:layout_width="150dp"
@@ -126,7 +128,8 @@
                     android:text="verification code"
                     android:textColor="#FFFF"
                     android:textSize="12dp"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
+
                 <EditText
                     android:id="@+id/code"
                     android:layout_width="150dp"
@@ -134,6 +137,7 @@
                     android:visibility="gone">
 
                 </EditText>
+
                 <Button
                     android:id="@+id/SendCode"
                     android:layout_width="150dp"
@@ -143,7 +147,7 @@
                     android:text="send code verification"
                     android:textColor="#FFFF"
                     android:textSize="12dp"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
 
             </LinearLayout>
@@ -157,10 +161,10 @@
                 android:layout_marginTop="10pt"
                 android:layout_marginEnd="10pt"
                 android:background="@drawable/button_next"
+                android:enabled="false"
                 android:text="Submit"
                 android:textColor="#FFFF"
-                android:textSize="12dp"
-                android:enabled="false"/>
+                android:textSize="12dp" />
 
             <Button
                 android:id="@+id/SGoToLogIn"

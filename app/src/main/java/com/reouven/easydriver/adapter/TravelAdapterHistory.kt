@@ -14,17 +14,19 @@ import com.reouven.easydriver.R
 import com.reouven.easydriver.entity.Travel
 import com.reouven.easydriver.viewmodel.TravelViewModel
 
-class TravelAdapterHistory(fragment: Fragment, driverId: String?)  :RecyclerView.Adapter<TravelAdapterHistory.ViewHolder>(){
+class TravelAdapterHistory(fragment: Fragment, driverId: String?) :
+    RecyclerView.Adapter<TravelAdapterHistory.ViewHolder>() {
     private val datalist = mutableListOf<Travel>()
     var driverId = driverId
     var fragment = fragment
-    fun setListData(data:MutableList<Travel>){
+    fun setListData(data: MutableList<Travel>) {
         datalist.clear()
         datalist.addAll(data)
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val  view = LayoutInflater.from(parent.context).inflate(R.layout.travel_row,parent,false)
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.travel_row_history, parent, false)
 
         return ViewHolder(view)
     }
@@ -39,9 +41,7 @@ class TravelAdapterHistory(fragment: Fragment, driverId: String?)  :RecyclerView
     }
 
 
-
-    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
-    {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var departure = itemView.findViewById<TextView>(R.id.datefrom)
         var arrival = itemView.findViewById<TextView>(R.id.dateTo)
@@ -51,7 +51,7 @@ class TravelAdapterHistory(fragment: Fragment, driverId: String?)  :RecyclerView
         var buttonValider = itemView.findViewById<Button>(R.id.accepter)
 
 
-        fun bindView(travel: Travel){
+        fun bindView(travel: Travel) {
 
             departure.setText(travel.Date_depart)
             arrival.setText(travel.Date_arriver)
@@ -62,16 +62,19 @@ class TravelAdapterHistory(fragment: Fragment, driverId: String?)  :RecyclerView
 
             itemView.setOnClickListener {
                 val bundle = bundleOf("travel" to travel.toString())
-                NavHostFragment.findNavController(fragment).navigate(R.id.action_driverHistoriyTravelFragment_to_infoTravelFragment,bundle)
+                NavHostFragment.findNavController(fragment).navigate(
+                    R.id.action_driverHistoriyTravelFragment2_to_infoTravelFragment2,
+                    bundle
+                )
             }
+
             buttonValider.setOnClickListener {
-                // ajouter ici nav vers reservation
                 TravelViewModel().UpdateToReceive(travel)
                 if (driverId != null)
-                    TravelViewModel().UpdateDriverId(travel,driverId!!)
+                    TravelViewModel().UpdateDriverId(travel, driverId!!)
                 val bundle = bundleOf("travel" to travel.toString())
                 NavHostFragment.findNavController(fragment)
-                    .navigate(R.id.action_driverHistoriyTravelFragment_to_inRoadFragment,bundle)
+                    .navigate(R.id.action_driverHistoriyTravelFragment2_to_inRoadFragment2, bundle)
             }
 
         }

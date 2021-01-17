@@ -1,4 +1,4 @@
-package com.reouven.easydriver.ui
+package com.reouven.easydriver.ui.fragment.authFragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,12 +11,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
-import com.reouven.easydriver.viewmodel.DriverViewModel
 import com.reouven.easydriver.R
+import com.reouven.easydriver.repository.DriverRepository
+import com.reouven.easydriver.ui.activity.ContextAppActivity
+import com.reouven.easydriver.viewmodel.DriverViewModel
 import com.reouven.easydriver.viewmodel.UserViewModel
 
 
 class LoginFragment : Fragment() {
+
     private lateinit var mail: EditText
     private lateinit var password: EditText
     private lateinit var driverId: String
@@ -32,24 +35,30 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initAll(view)
         setAllButtonAction(view)
     }
 
+
+    private fun initAll(view: View) {
+        mail = view.findViewById<EditText>(R.id.Lmail)
+        password = view.findViewById<EditText>(R.id.Lpassword)
+        resetPassword = view.findViewById(R.id.resetMdp)
+    }
+
     private fun setAllButtonAction(view: View) {
         resetPassword.setOnClickListener {
-            if (UserViewModel().resetPassword(mail.text.toString()))
+            if (DriverViewModel().resetPassword(mail.text.toString()))
                 Toast.makeText(
                     this.activity,
                     "mail send, please check your mail",
                     Toast.LENGTH_LONG
                 ).show()
         }
-
-
         view.findViewById<Button>(R.id.LGoToOrder).setOnClickListener {
             if (notEmpty()) {
-                if(isAdmin(mail.text.toString(), password.text.toString()))
+                if (isAdmin(mail.text.toString(), password.text.toString()))
                     findNavController().navigate(R.id.action_loginFragment_to_adminActivity)
                 else
                     checkUserExist(mail.text.toString(), password.text.toString())
@@ -59,46 +68,30 @@ class LoginFragment : Fragment() {
             }
         }
         view.findViewById<Button>(R.id.LGoToSignIn).setOnClickListener {
-
             findNavController().navigate(R.id.action_loginFragment_to_signin)
-
         }
     }
 
-    private fun isAdmin(mail: String, password: String): Boolean = mail=="BOSS" && password=="555"
+    private fun isAdmin(mail: String, password: String): Boolean =
+        mail == "BOSS" && password == "555"
 
-    private fun initAll(view: View) {
-        mail = view.findViewById<EditText>(R.id.Lmail)
-        password = view.findViewById<EditText>(R.id.Lpassword)
-        resetPassword = view.findViewById(R.id.resetMdp)
-    }
+    private fun notEmpty(): Boolean = mail.text.toString() != "" &&
+            password.text.toString() != ""
 
     private fun checkUserExist(mail: String, password: String) {
-
         DriverViewModel().SignInDriver(mail, password).addOnCompleteListener { task ->
-
             if (task.isSuccessful) {
                 driverId = FirebaseAuth.getInstance().uid.toString()
-                //val bundle = bundleOf("driverId" to driverId)
                 Toast.makeText(this.activity, "welcome", Toast.LENGTH_LONG).show()
-                /*findNavController().navigate(
-                    R.id.action_loginFragment_to_contextAppActivity,
-                    bundle
-                )*/
                 val intent = Intent(activity, ContextAppActivity::class.java)
                 intent.putExtra("Driverid", driverId)
                 this.requireActivity().startActivity(intent)
-
             } else {
                 Toast.makeText(this.activity, "mail Or password not valid", Toast.LENGTH_LONG)
                     .show()
             }
-
         }
-
     }
 
-    private fun notEmpty(): Boolean = mail.text.toString() != "" &&
-            password.text.toString() != ""
 
 }

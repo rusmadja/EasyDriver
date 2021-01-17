@@ -1,16 +1,17 @@
-package com.reouven.easydriver.ui
+package com.reouven.easydriver.ui.fragment.appFragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.reouven.easydriver.R
 
 class InfoTravelFragment : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -22,14 +23,11 @@ class InfoTravelFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         var value = arguments?.getString("travel").toString()
 
         view.findViewById<TextView>(R.id.all_info).setText(value)
-
         view.findViewById<Button>(R.id.returnToAllData).setOnClickListener {
             findNavController().navigate(R.id.action_infoTravelFragment_to_appMainFragment)
         }
     }
-
 }

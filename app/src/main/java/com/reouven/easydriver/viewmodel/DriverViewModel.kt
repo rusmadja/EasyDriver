@@ -9,24 +9,14 @@ import com.reouven.easydriver.repository.DriverRepository
 
 class DriverViewModel() : ViewModel() {
     private val DriverRepo = DriverRepository()
-    
+
     fun SignInDriver(mail: String, password: String) = DriverRepo.SignIn(mail, password)
-    fun signInWithCredential(credential: PhoneAuthCredential) =DriverRepo.signInWithCredential(credential)
 
+    fun signInWithCredential(credential: PhoneAuthCredential) =
+        DriverRepo.signInWithCredential(credential)
 
-    fun resetPassword(mail: String): Boolean {
-        if (mail != "") {
-            DriverRepo.resetPassword(mail)
-            return true
-        }
-        else
-            return false
-    }
-
-    fun updateDriver(driver: Driver) {
-        DriverRepo.UpdateDriverInFirebase(driver)
-    }
-    fun Storedriver (mail: String, password: String, activity: FragmentActivity?)= DriverRepo.StoreDriver(mail, password)
+    fun Storedriver(mail: String, password: String, activity: FragmentActivity?) =
+        DriverRepo.StoreDriver(mail, password)
 
     fun setdriverInFirebase(driver: Driver) {
 
@@ -40,6 +30,17 @@ class DriverViewModel() : ViewModel() {
         DriverRepo.setDriverInFirebase(hsmap, driver.id)
 
     }
+
+
+    fun resetPassword(mail: String): Boolean {
+        if (mail != "") {
+            DriverRepo.resetPassword(mail)
+            return true
+        } else
+            return false
+    }
+
+    fun updateDriver(driver: Driver) = DriverRepo.UpdateDriverInFirebase(driver)
 
 
 }

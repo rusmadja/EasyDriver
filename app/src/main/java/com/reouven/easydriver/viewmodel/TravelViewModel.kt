@@ -8,13 +8,23 @@ import com.reouven.easydriver.repository.TravelRepository
 
 class TravelViewModel : ViewModel() {
     val repo = TravelRepository()
-    fun fetchUserData(): LiveData<MutableList<Travel>> {
+
+    fun fetchClosesTravelData(): LiveData<MutableList<Travel>> {
         val mutableData = MutableLiveData<MutableList<Travel>>()
-        repo.getFreeTravel().observeForever { userlist ->
+        repo.getLiveDataTravelListByStatus("CLOSES").observeForever { userlist ->
             mutableData.value = userlist
         }
         return mutableData
     }
+
+    fun fetchSENDUserData(): LiveData<MutableList<Travel>> {
+        val mutableData = MutableLiveData<MutableList<Travel>>()
+        repo.getLiveDataTravelListByStatus("SEND").observeForever { userlist ->
+            mutableData.value = userlist
+        }
+        return mutableData
+    }
+
     fun fetchUserDatabyDriverid(driverId: String): LiveData<MutableList<Travel>> {
         val mutableData = MutableLiveData<MutableList<Travel>>()
         repo.getTravelDatabyDriverId(driverId).observeForever { userlist ->
@@ -22,31 +32,25 @@ class TravelViewModel : ViewModel() {
         }
         return mutableData
     }
-    fun UpdateToReceive(travel: Travel)
-    {
-        repo.UpdateToReceive(travel)
+
+    fun UpdateToReceive(travel: Travel) {
+        repo.UpdateStatus(travel, "RECEIVE")
     }
 
     fun UpdateDriverId(travel: Travel, driverId: String) {
-        repo.UpdateDriverId(travel,driverId)
+        repo.UpdateDriverId(travel, driverId)
     }
 
     fun UpdateToSEND(travel: Travel) {
-        repo.UpdateToSEND(travel)
+        repo.UpdateStatus(travel, "SEND")
     }
 
     fun UpdateToONROAD(travel: Travel) {
-        repo.UpdateToONROAD(travel)
-    }
-    fun UpdateToCLOSE(travel: Travel) {
-        repo.UpdateToCLOSE(travel)
+        repo.UpdateStatus(travel, "ONROAD")
     }
 
-    fun fetchAllUserData(): LiveData<MutableList<Travel>>  {
-        val mutableData = MutableLiveData<MutableList<Travel>>()
-        repo.getonRoadTravelData().observeForever { userlist ->
-            mutableData.value = userlist
-        }
-        return mutableData
+    fun UpdateToCLOSE(travel: Travel) {
+        repo.UpdateStatus(travel, "CLOSE")
     }
+
 }

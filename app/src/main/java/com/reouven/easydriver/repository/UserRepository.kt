@@ -8,7 +8,6 @@ class UserRepository() {
     val reference = FirebaseDatabase.getInstance().getReference("User")
 
     fun setUserInFirebase(user: HashMap<String, String>, userId: String) {
-        //val reference = FirebaseDatabase.getInstance().getReference("User")
         reference.child(userId).setValue(user)
     }
 
@@ -19,10 +18,18 @@ class UserRepository() {
         user
         TODO()
     }
-    fun StoreUser(mail:String, password:String) = FirebaseAuth.getInstance().createUserWithEmailAndPassword(mail, password)
+
+    fun StoreUser(mail: String, password: String) =
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(mail, password)
 
     fun resetPassword(mail: String) {
         var user = FirebaseAuth.getInstance()
         user.sendPasswordResetEmail(mail)
     }
+
+    /*=========================================================================================================*/
+    /*===========================ajouter ici un get user info en fonction du id================================*/
+    /*=========================================================================================================*/
+    /*=========================================================================================================*/
+
 }

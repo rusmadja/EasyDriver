@@ -1,24 +1,24 @@
-package com.reouven.easydriver.ui
+package com.reouven.easydriver.ui.activity
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.reouven.easydriver.R
+import com.reouven.easydriver.ui.fragment.appFragment.ProfilFragment
+import com.reouven.easydriver.ui.fragment.navFragmentSupport.AppSupportFragment
+import com.reouven.easydriver.ui.fragment.navFragmentSupport.AppSupportFragmentNewFeed
 
 
 class ContextAppActivity : AppCompatActivity() {
 
-    lateinit var driverId :String
+    lateinit var driverId: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_context_app)
+
+
         val intent = intent
         driverId = intent.getStringExtra("Driverid")
 
@@ -26,18 +26,18 @@ class ContextAppActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.Profil -> {
                     setTitle("Profil")
-                    /*var fragment: Fragment = AppMainFragment()
+                    var fragment: Fragment = ProfilFragment()
                     supportFragmentManager.beginTransaction().apply {
-                        replace(R.id.app_nav_support,fragment)
+                        replace(R.id.app_nav_support, fragment)
                         commit()
-                    }*/
+                    }
                     true
                 }
                 R.id.NewFeeds -> {
                     setTitle("newFeeds")
-                    var fragment: Fragment = AppMainFragment()
+                    var fragment: Fragment = AppSupportFragmentNewFeed()
                     supportFragmentManager.beginTransaction().apply {
-                        replace(R.id.app_nav_support,fragment)
+                        replace(R.id.app_nav_support, fragment)
                         commit()
                     }
 
@@ -45,9 +45,9 @@ class ContextAppActivity : AppCompatActivity() {
                 }
                 R.id.History -> {
                     setTitle("History")
-                    var fragment: Fragment = DriverHistoriyTravelFragment()
+                    var fragment: Fragment = AppSupportFragment()
                     supportFragmentManager.beginTransaction().apply {
-                        replace(R.id.app_nav_support,fragment)
+                        replace(R.id.app_nav_support, fragment)
                         commit()
                     }
                     true

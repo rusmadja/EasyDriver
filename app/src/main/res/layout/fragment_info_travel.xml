@@ -1,27 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.InfoTravelFragment">
+    android:orientation="vertical"
+    tools:context=".ui.fragment.appFragment.InfoTravelFragment">
 
-    <LinearLayout
+
+    <Button
+        android:id="@+id/returnToAllData"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_cancel_black_18dp" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-<!--mettre ici le darwable croix-->
-        <Button
-            android:id="@+id/returnToAllData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_add_black_24dp" />
+        android:layout_height="300dp"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="information.json"
+        app:lottie_loop="false" />
 
-        <TextView
-            android:id="@+id/all_info"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="ici mettre info de travel si il veut plus dinfo" />
+    <TextView
+        android:id="@+id/userinfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ici mettre info de travel si il veut plus dinfo" />
 
-    </LinearLayout>
+    <TextView
+        android:id="@+id/travelinfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ici mettre info de travel si il veut plus dinfo" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/all_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ici mettre info de travel si il veut plus dinfo" />
+
+
+</LinearLayout>

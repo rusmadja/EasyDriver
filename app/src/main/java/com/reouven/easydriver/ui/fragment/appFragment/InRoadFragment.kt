@@ -1,4 +1,4 @@
-package com.reouven.easydriver.ui
+package com.reouven.easydriver.ui.fragment.appFragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +14,11 @@ import com.reouven.easydriver.viewmodel.TravelViewModel
 class InRoadFragment : Fragment() {
 
     lateinit var travel: Travel
+    lateinit var value: String
+    lateinit var list: MutableList<String>
+    lateinit var finish: Button
+    lateinit var start: Button
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,37 +29,25 @@ class InRoadFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var value = arguments?.getString("travel").toString()
-        var list = value.split(",") as MutableList<String>
-        travel = Travel(
-            list[0],
-            list[1],
-            list[2],
-            list[3],
-            list[4],
-            list[5],
-            list[6],
-            list[7],
-        )
-        var finish = view.findViewById<Button>(R.id.finishRoad)
-        var start = view.findViewById<Button>(R.id.onRoad)
 
-        view.findViewById<Button>(R.id.annule_road).setOnClickListener {
-            findNavController().navigate(R.id.action_inRoadFragment_to_appMainFragment)
-            TravelViewModel().UpdateToSEND(travel)
-        }
-
+        value = arguments?.getString("travel").toString()
+        list = value.split(",") as MutableList<String>
+        travel = Travel(list[0], list[1], list[2], list[3], list[4], list[5], list[6], list[7])
+        finish = view.findViewById<Button>(R.id.finishRoad)
+        start = view.findViewById<Button>(R.id.onRoad)
         start.setOnClickListener {
             TravelViewModel().UpdateToONROAD(travel)
             finish.isEnabled = true
             start.isEnabled = false
         }
-
         finish.setOnClickListener {
             findNavController().navigate(R.id.action_inRoadFragment_to_appMainFragment)
             TravelViewModel().UpdateToCLOSE(travel)
         }
-
+        view.findViewById<Button>(R.id.annule_road).setOnClickListener {
+            findNavController().navigate(R.id.action_inRoadFragment_to_appMainFragment)
+            TravelViewModel().UpdateToSEND(travel)
+        }
     }
 
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_nav_history"
+    app:startDestination="@id/driverHistoriyTravelFragment2">
+
+    <fragment
+        android:id="@+id/driverHistoriyTravelFragment2"
+        android:name="com.reouven.easydriver.ui.fragment.appFragment.DriverHistoriyTravelFragment"
+        android:label="fragment_driver_historiy_travel"
+        tools:layout="@layout/fragment_driver_historiy_travel" >
+        <action
+            android:id="@+id/action_driverHistoriyTravelFragment2_to_infoTravelFragment2"
+            app:destination="@id/infoTravelFragment2" />
+        <action
+            android:id="@+id/action_driverHistoriyTravelFragment2_to_inRoadFragment2"
+            app:destination="@id/inRoadFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/inRoadFragment2"
+        android:name="com.reouven.easydriver.ui.fragment.appFragment.InRoadFragment"
+        android:label="fragment_in_road"
+        tools:layout="@layout/fragment_in_road" >
+        <action
+            android:id="@+id/action_inRoadFragment2_to_driverHistoriyTravelFragment2"
+            app:destination="@id/driverHistoriyTravelFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoTravelFragment2"
+        android:name="com.reouven.easydriver.ui.fragment.appFragment.InfoTravelFragment"
+        android:label="fragment_info_travel"
+        tools:layout="@layout/fragment_info_travel" >
+        <action
+            android:id="@+id/action_infoTravelFragment2_to_driverHistoriyTravelFragment2"
+            app:destination="@id/driverHistoriyTravelFragment2" />
+    </fragment>
+</navigation>

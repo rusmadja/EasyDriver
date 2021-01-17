@@ -1,9 +1,9 @@
 package com.reouven.easydriver.repository
 
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.reouven.easydriver.entity.Driver
 
@@ -12,7 +12,6 @@ class DriverRepository() {
     var auth = Firebase.auth
 
     fun setDriverInFirebase(Driver: HashMap<String, String>, DriverId: String) {
-        //val reference = FirebaseDatabase.getInstance().getReference("Driver")
         reference.child(DriverId).setValue(Driver)
     }
 
@@ -23,14 +22,22 @@ class DriverRepository() {
         Driver
         TODO()
     }
-    fun StoreDriver(mail:String, password:String) = FirebaseAuth.getInstance().createUserWithEmailAndPassword(mail, password)
+
+    fun StoreDriver(mail: String, password: String) =
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(mail, password)
 
     fun resetPassword(mail: String) {
         var Driver = FirebaseAuth.getInstance()
         Driver.sendPasswordResetEmail(mail)
     }
 
-    fun signInWithCredential(credential: PhoneAuthCredential) = auth.signInWithCredential(credential)
+    fun signInWithCredential(credential: PhoneAuthCredential) =
+        auth.signInWithCredential(credential)
 
+
+/*=========================================================================================================*/
+/*===========================ajouter ici un get driver info en fonction du id==============================*/
+/*=========================================================================================================*/
+/*=========================================================================================================*/
 
 }

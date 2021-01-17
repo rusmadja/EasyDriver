@@ -8,9 +8,6 @@ import com.reouven.easydriver.repository.UserRepository
 class UserViewModel() : ViewModel() {
     private val UserRepo = UserRepository()
 
-    /*fun setUser(user: User){
-        UserRepo.setUserInFirebase(user)
-    }*/
     fun SignInUser(mail: String, password: String) = UserRepo.SignIn(mail, password)
 
     fun resetPassword(mail: String): Boolean {
@@ -22,9 +19,8 @@ class UserViewModel() : ViewModel() {
             return false
     }
 
-    fun updateUser(user: User) {
-        UserRepo.UpdateUserInFirebase(user)
-    }
+    fun updateUser(user: User) = UserRepo.UpdateUserInFirebase(user)
+
     fun StoreUser (mail: String, password: String)= UserRepo.StoreUser(mail, password)
 
     fun setUserInFirebase(user: User) {
@@ -39,4 +35,8 @@ class UserViewModel() : ViewModel() {
         UserRepo.setUserInFirebase(hsmap, user.id)
 
     }
+
+    /*fun setUser(user: User){
+    UserRepo.setUserInFirebase(user)}*/
+
 }

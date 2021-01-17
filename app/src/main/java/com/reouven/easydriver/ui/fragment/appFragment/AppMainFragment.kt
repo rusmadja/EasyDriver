@@ -1,14 +1,12 @@
-package com.reouven.easydriver.ui
+package com.reouven.easydriver.ui.fragment.appFragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.reouven.easydriver.R
@@ -31,8 +29,6 @@ class AppMainFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-
-
         //initialise ici le driver id
         adapter = TravelAdapter(this,null)
 
@@ -44,11 +40,10 @@ class AppMainFragment : Fragment() {
     }
 
     fun observer(){
-        viewModel.fetchUserData().observe(this.requireActivity(), Observer {
+        viewModel.fetchSENDUserData().observe(this.requireActivity(), Observer {
             adapter.setListData(it)
             adapter.notifyDataSetChanged()
         })
     }
-
 
 }

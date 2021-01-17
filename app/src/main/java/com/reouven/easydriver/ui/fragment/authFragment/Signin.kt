@@ -1,4 +1,4 @@
-package com.reouven.easydriver.ui
+package com.reouven.easydriver.ui.fragment.authFragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -39,9 +39,9 @@ class Signin : Fragment() {
     lateinit var driver: Driver
     lateinit var driverId: String
     lateinit var driverViewModel: DriverViewModel
-    lateinit var sendCode : Button
-    lateinit var verification : Button
-    lateinit var Submit : Button
+    lateinit var sendCode: Button
+    lateinit var verification: Button
+    lateinit var Submit: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,49 +57,7 @@ class Signin : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initAllData(view)
-
         setAllButtonClick(view)
-
-
-    }
-
-    private fun setAllButtonClick(view: View) {
-
-        Submit.setOnClickListener {
-
-            if (checkIfAllNotEmpty()) {
-                createemail(mail.text.toString(), password.text.toString())
-            } else {
-                Toast.makeText(
-                    this.activity,
-                    "please enter data",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-        }
-
-        sendCode.setOnClickListener {
-            if(telephone.text.toString() != "")
-                startPhoneNumberVerification()
-                codeVerification.visibility = view.visibility
-                verification.visibility = view.visibility
-                sendCode.visibility=View.GONE
-
-        }
-
-        verification.setOnClickListener {
-            //faire lauthntification
-            verifyPhoneNumberWithCode(storedVerificationId)
-        }
-
-        view.findViewById<Button>(R.id.SGoToLogIn).setOnClickListener {
-            findNavController().navigate(R.id.action_signin_to_loginFragment)
-        }
-
-        view.findViewById<EditText>(R.id.phone_number).setOnClickListener{
-            sendCode.visibility = view.visibility
-            sendCode.visibility = View.GONE
-        }
 
     }
 
@@ -111,9 +69,9 @@ class Signin : Fragment() {
         codeVerification = view.findViewById<EditText>(R.id.code)
         telephone = view.findViewById(R.id.phone_number)
         driverViewModel = DriverViewModel()
-        sendCode = view.findViewById <Button>(R.id.SendCode)
-        verification = view.findViewById <Button>(R.id.verifaction)
-        Submit = view.findViewById <Button>(R.id.SGoToOrder)
+        sendCode = view.findViewById<Button>(R.id.SendCode)
+        verification = view.findViewById<Button>(R.id.verifaction)
+        Submit = view.findViewById<Button>(R.id.SGoToOrder)
 
         mAuth = FirebaseAuth.getInstance()
 
@@ -123,14 +81,16 @@ class Signin : Fragment() {
 
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
 
-                Toast.makeText(this@Signin.requireActivity(), "code verifier  ", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@Signin.requireActivity(), "code verifier  ", Toast.LENGTH_SHORT)
+                    .show()
                 signInWithPhoneAuthCredential(credential)
             }
 
             override fun onVerificationFailed(e: FirebaseException) {
 
                 if (e is FirebaseAuthInvalidCredentialsException) {
-                    Toast.makeText(this@Signin.requireActivity(), "failed ", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@Signin.requireActivity(), "failed ", Toast.LENGTH_SHORT)
+                        .show()
 
                 } else if (e is FirebaseTooManyRequestsException) {
 
@@ -150,6 +110,42 @@ class Signin : Fragment() {
 
     }
 
+    private fun setAllButtonClick(view: View) {
+        Submit.setOnClickListener {
+            if (checkIfAllNotEmpty()) {
+                createemail(mail.text.toString(), password.text.toString())
+            } else {
+                Toast.makeText(
+                    this.activity,
+                    "please enter data",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+
+        sendCode.setOnClickListener {
+            if (telephone.text.toString() != "")
+                startPhoneNumberVerification()
+            codeVerification.visibility = view.visibility
+            verification.visibility = view.visibility
+            sendCode.visibility = View.GONE
+        }
+
+        verification.setOnClickListener {
+            verifyPhoneNumberWithCode(storedVerificationId)
+        }
+
+        view.findViewById<Button>(R.id.SGoToLogIn).setOnClickListener {
+            findNavController().navigate(R.id.action_signin_to_loginFragment)
+        }
+
+        view.findViewById<EditText>(R.id.phone_number).setOnClickListener {
+            sendCode.visibility = view.visibility
+            sendCode.visibility = View.GONE
+        }
+
+    }
+
     private fun checkIfAllNotEmpty(): Boolean =
         firstName.text.toString() != "" &&
                 lastName.text.toString() != "" &&
@@ -159,13 +155,13 @@ class Signin : Fragment() {
 
     private fun createemail(mail: String, password: String) {
 
-        DriverViewModel().Storedriver(mail, password,this.activity).addOnCompleteListener { task ->
+        DriverViewModel().Storedriver(mail, password, this.activity).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                 driverId = FirebaseAuth.getInstance().uid.toString()
+                driverId = FirebaseAuth.getInstance().uid.toString()
                 Toast.makeText(this.activity, "welcome", Toast.LENGTH_LONG).show()
                 createDriver()
                 driverViewModel.setdriverInFirebase(driver)
-                val bundle = bundleOf("driverId" to driverId )
+                val bundle = bundleOf("driverId" to driverId)
                 findNavController().navigate(
                     R.id.action_signin_to_contextAppActivity,
                     bundle
@@ -190,6 +186,7 @@ class Signin : Fragment() {
             telephone.text.toString()
         )
     }
+
     private fun startPhoneNumberVerification() {
         // [START start_phone_auth]
         Toast.makeText(this.requireActivity(), "init du phone", Toast.LENGTH_SHORT).show()
@@ -210,38 +207,31 @@ class Signin : Fragment() {
         val CODE = codeVerification.text.toString()
         val credential = PhoneAuthProvider.getCredential(verificationId!!, CODE.toString())
         // [END verify_with_code]
-        //Toast.makeText(this.requireActivity(), "$credential", Toast.LENGTH_LONG).show()
-
         signInWithPhoneAuthCredential(credential)
     }
-
 
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
 
         DriverViewModel().signInWithCredential(credential)
             .addOnCompleteListener(this.requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    //Toast.makeText(this.requireActivity(), "task succesfull ", Toast.LENGTH_SHORT).show()
-                    //flag=true
                     val user = task.result?.user
-                    Submit.isEnabled=true
-                    verification.isEnabled=false
-                    codeVerification.isEnabled=false
-                    // ...
+                    Submit.isEnabled = true
+                    verification.isEnabled = false
+                    codeVerification.isEnabled = false
                 } else {
                     // Sign in failed, display a message and update the UI
-                    //flag=false
                     Toast.makeText(this.requireActivity(), "task else ", Toast.LENGTH_SHORT).show()
 
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         // The verification code entered was invalid
-                        //flag=false
-                        Toast.makeText(this.requireActivity(), "task exception ", Toast.LENGTH_SHORT).show()
-
+                        Toast.makeText(
+                            this.requireActivity(),
+                            "task exception ",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
-
-        //return flag
     }
 }
