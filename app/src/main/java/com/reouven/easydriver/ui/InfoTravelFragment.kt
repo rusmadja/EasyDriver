@@ -1,4 +1,4 @@
-package com.reouven.easydriver
+package com.reouven.easydriver.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
+import com.reouven.easydriver.R
 
 class InfoTravelFragment : Fragment() {
     override fun onCreateView(

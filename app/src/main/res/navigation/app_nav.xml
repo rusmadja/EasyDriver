@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/appMainFragment"
-        android:name="com.reouven.easydriver.AppMainFragment"
+        android:name="com.reouven.easydriver.ui.AppMainFragment"
         android:label="fragment_app_main"
         tools:layout="@layout/fragment_app_main" >
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/infoTravelFragment"
-        android:name="com.reouven.easydriver.InfoTravelFragment"
+        android:name="com.reouven.easydriver.ui.InfoTravelFragment"
         android:label="fragment_info_travel"
         tools:layout="@layout/fragment_info_travel" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/inRoadFragment"
-        android:name="com.reouven.easydriver.InRoadFragment"
+        android:name="com.reouven.easydriver.ui.InRoadFragment"
         android:label="fragment_in_road"
         tools:layout="@layout/fragment_in_road" >
         <action
@@ -46,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/driverHistoriyTravelFragment"
-        android:name="com.reouven.easydriver.DriverHistoriyTravelFragment"
+        android:name="com.reouven.easydriver.ui.DriverHistoriyTravelFragment"
         android:label="fragment_driver_historiy_travel"
         tools:layout="@layout/fragment_driver_historiy_travel" >
         <action

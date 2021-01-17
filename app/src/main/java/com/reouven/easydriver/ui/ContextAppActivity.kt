@@ -2,7 +2,6 @@ package com.reouven.easydriver.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.reouven.easydriver.DriverHistoriyTravelFragment
 import com.reouven.easydriver.R
 
 

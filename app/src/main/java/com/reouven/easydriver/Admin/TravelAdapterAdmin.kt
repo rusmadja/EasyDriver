@@ -1,4 +1,4 @@
-package com.reouven.easydriver.adapter
+package com.reouven.easydriver.Admin
 
 
 import android.view.LayoutInflater
@@ -6,14 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.reouven.easydriver.R
 import com.reouven.easydriver.entity.Travel
-import com.reouven.easydriver.viewmodel.TravelViewModel
 
 
 class TravelAdapterAdmin(fragment: Fragment, driverId: String?) : RecyclerView.Adapter<TravelAdapterAdmin.ViewHolder>() {

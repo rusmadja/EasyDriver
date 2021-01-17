@@ -1,4 +1,4 @@
-package com.reouven.easydriver
+package com.reouven.easydriver.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.reouven.easydriver.R
 import com.reouven.easydriver.entity.Travel
 import com.reouven.easydriver.viewmodel.TravelViewModel
 
