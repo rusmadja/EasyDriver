@@ -15,10 +15,10 @@ class Travel (
     )
 {
     override fun toString(): String =
-                "$userId, " + "$driverId,"+ "$nb_voyageur, " + "$adresse_depart, " + "$adresse_arriver, " + "$Date_depart, " + "$Date_arriver,"+ "$travelId"
+                //"$userId, " + "$driverId,"+ "$nb_voyageur, " + "$adresse_depart, " + "$adresse_arriver, " + "$Date_depart, " + "$Date_arriver,"+ "$travelId"
 
 
-   //             "$userId, " + "$driverId,"+ "$nb_voyageur, " + "$adresse_depart, " + "$adresse_arriver, " + "$Date_depart, " + "$Date_arriver,"+ "$dateReservation,"+ "$Status,"+ "$travelId"
+         "$userId, " + "$driverId,"+ "$nb_voyageur, " + "$adresse_depart, " + "$adresse_arriver, " + "$Date_depart, " + "$Date_arriver,"+ "$dateReservation,"+ "$Status,"+ "$travelId"
 
 
 }

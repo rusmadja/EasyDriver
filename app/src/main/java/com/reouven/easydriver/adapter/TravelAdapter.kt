@@ -78,13 +78,6 @@ class TravelAdapter(fragment: Fragment, driverId: String?) :
                 if (driverId != null)
                     TravelViewModel().UpdateDriverId(travel, driverId!!)
 
-                val bundle = bundleOf("travel" to travel.toString())
-
-                findNavController(fragment).navigate(
-                    R.id.action_appMainFragment_to_inRoadFragment,
-                    bundle
-                )
-
             }
 
         }

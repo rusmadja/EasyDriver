@@ -12,7 +12,7 @@ import com.reouven.easydriver.ui.fragment.navFragmentSupport.AppSupportFragmentN
 class ContextAppActivity : AppCompatActivity() {
 
     lateinit var driverId: String
-
+    lateinit var menu: com.google.android.material.bottomnavigation.BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +22,10 @@ class ContextAppActivity : AppCompatActivity() {
         val intent = intent
         driverId = intent.getStringExtra("Driverid")
 
-        findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNav).setOnNavigationItemSelectedListener {
+
+        menu = findViewById(R.id.bottomNav)
+        menu.selectedItemId = R.id.NewFeeds
+        menu.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.Profil -> {
                     setTitle("Profil")

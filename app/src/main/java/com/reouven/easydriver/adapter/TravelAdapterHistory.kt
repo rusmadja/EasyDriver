@@ -60,16 +60,12 @@ class TravelAdapterHistory(fragment: Fragment, driverId: String?) :
             passenger.setText(travel.nb_voyageur)
 
 
-            itemView.setOnClickListener {
-                val bundle = bundleOf("travel" to travel.toString())
-                NavHostFragment.findNavController(fragment).navigate(
-                    R.id.action_driverHistoriyTravelFragment2_to_infoTravelFragment2,
-                    bundle
-                )
+            if (travel.Status == "CLOSE") {
+                buttonValider.isEnabled = false
+                buttonValider.setText("closed")
             }
 
             buttonValider.setOnClickListener {
-                TravelViewModel().UpdateToReceive(travel)
                 if (driverId != null)
                     TravelViewModel().UpdateDriverId(travel, driverId!!)
                 val bundle = bundleOf("travel" to travel.toString())

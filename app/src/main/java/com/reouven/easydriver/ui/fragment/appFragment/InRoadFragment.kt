@@ -32,7 +32,7 @@ class InRoadFragment : Fragment() {
 
         value = arguments?.getString("travel").toString()
         list = value.split(",") as MutableList<String>
-        travel = Travel(list[0], list[1], list[2], list[3], list[4], list[5], list[6], list[7])
+        travel = Travel(list[0], list[1], list[2], list[3], list[4], list[5], list[6], list[7],list[8],list[9])
         finish = view.findViewById<Button>(R.id.finishRoad)
         start = view.findViewById<Button>(R.id.onRoad)
         start.setOnClickListener {
@@ -41,12 +41,12 @@ class InRoadFragment : Fragment() {
             start.isEnabled = false
         }
         finish.setOnClickListener {
-            findNavController().navigate(R.id.action_inRoadFragment_to_appMainFragment)
+            findNavController().navigate(R.id.action_inRoadFragment2_to_driverHistoriyTravelFragment2)
             TravelViewModel().UpdateToCLOSE(travel)
         }
         view.findViewById<Button>(R.id.annule_road).setOnClickListener {
-            findNavController().navigate(R.id.action_inRoadFragment_to_appMainFragment)
-            TravelViewModel().UpdateToSEND(travel)
+            findNavController().navigate(R.id.action_inRoadFragment2_to_driverHistoriyTravelFragment2)
+            TravelViewModel().UpdateToReceive(travel)
         }
     }
 

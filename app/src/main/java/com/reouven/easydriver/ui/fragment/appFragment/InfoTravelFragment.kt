@@ -26,6 +26,7 @@ class InfoTravelFragment : Fragment() {
         var value = arguments?.getString("travel").toString()
 
         view.findViewById<TextView>(R.id.all_info).setText(value)
+
         view.findViewById<Button>(R.id.returnToAllData).setOnClickListener {
             findNavController().navigate(R.id.action_infoTravelFragment_to_appMainFragment)
         }
