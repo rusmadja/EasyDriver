@@ -1,6 +1,7 @@
 package com.reouven.easydriver.viewmodel
 
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.reouven.easydriver.entity.User
@@ -55,7 +56,7 @@ class UserViewModel() : ViewModel() {
 
     }
 
-    fun getUserById(userId: String) : MutableList<User>
+    fun getUserById(userId: String) : LiveData<MutableList<User>>
     {
         return UserRepo.getUserById(userId)
 
