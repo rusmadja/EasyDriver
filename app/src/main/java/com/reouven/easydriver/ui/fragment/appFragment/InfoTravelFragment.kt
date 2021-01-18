@@ -40,6 +40,7 @@ class InfoTravelFragment : Fragment() {
         view.findViewById<TextView>(R.id.all_info).setText(value)
        // view.findViewById<TextView>(R.id.userinfo).setText(user.toString())
 
+
         /**
          * this button return to the main list
          */
