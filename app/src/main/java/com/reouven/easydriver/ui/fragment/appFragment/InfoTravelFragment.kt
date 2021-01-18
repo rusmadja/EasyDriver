@@ -9,7 +9,10 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.reouven.easydriver.R
-
+/**
+ * InfoTravelFragment : this fragment is called after a click on an item of the list
+ * display all the details about a travel
+ */
 class InfoTravelFragment : Fragment() {
 
     override fun onCreateView(
@@ -20,6 +23,10 @@ class InfoTravelFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_info_travel, container, false)
     }
 
+    /**
+     * the value set by the bundle send by the TravelAdapter.
+     * in this value there is all the data of the travel ( travel.toString() )
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -27,6 +34,9 @@ class InfoTravelFragment : Fragment() {
 
         view.findViewById<TextView>(R.id.all_info).setText(value)
 
+        /**
+         * this button return to the main list
+         */
         view.findViewById<Button>(R.id.returnToAllData).setOnClickListener {
             findNavController().navigate(R.id.action_infoTravelFragment_to_appMainFragment)
         }

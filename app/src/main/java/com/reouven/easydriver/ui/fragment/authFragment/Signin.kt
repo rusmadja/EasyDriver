@@ -21,8 +21,10 @@ import com.reouven.easydriver.entity.Driver
 import com.reouven.easydriver.viewmodel.DriverViewModel
 import java.util.concurrent.TimeUnit
 
-
+/** Sign in Fragment : this Fragment will allows the Driver to Create an account.*/
 class Signin : Fragment() {
+
+    /** variables declarations  */
 
     var auth = FirebaseAuth.getInstance()
     private lateinit var mAuth: FirebaseAuth
@@ -43,6 +45,7 @@ class Signin : Fragment() {
     lateinit var verification: Button
     lateinit var Submit: Button
 
+    /** onCreateView : basic function of the fragment */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,7 +55,7 @@ class Signin : Fragment() {
         return inflater.inflate(R.layout.fragment_signin, container, false)
     }
 
-
+    /** onViewCreated : the function that will execute all the fragment action */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -61,6 +64,12 @@ class Signin : Fragment() {
 
     }
 
+    /** init all the declarations and do all the binding we need
+     * mail(textview) , password(textview) , firstname(textview) , lastname(textview) ,telephone(textview) , driverViewModel(UserViewModel())
+     * in this fragment we used the phone verification so we add :
+     * a phone number(textview) , a codeVerification(textview) , a SendCode(Button) , a Verification(Button)
+     * also we init a callbacks in order to be able to send and check the verificationCode sended on the phone of the Driver
+     * */
     private fun initAllData(view: View) {
         mail = view.findViewById<EditText>(R.id.mail)
         password = view.findViewById<EditText>(R.id.password)
@@ -110,7 +119,12 @@ class Signin : Fragment() {
 
     }
 
+    /** called all the buttons listener of the SigninFragment  */
     private fun setAllButtonClick(view: View) {
+
+        /** call Submit button : Check if the fields are fulfil after that call the function createemail
+         * in order to register the Driver in the application
+         * after all the driver will be register in firebase authentication and in the realTime Database.*/
         Submit.setOnClickListener {
             if (checkIfAllNotEmpty()) {
                 createemail(mail.text.toString(), password.text.toString())
@@ -123,6 +137,10 @@ class Signin : Fragment() {
             }
         }
 
+        /** call SendCode button : Check if the fields are fulfil after that call the function startPhoneNumberVerification()
+         * in order to send the Verification Code on the Driver's Phone
+         * after all the EditText for typing the code is open and the button Verification too
+         * the Button send Code disappear*/
         sendCode.setOnClickListener {
             if (telephone.text.toString() != "")
                 startPhoneNumberVerification()
@@ -131,14 +149,22 @@ class Signin : Fragment() {
             sendCode.visibility = View.GONE
         }
 
+        /** call verification button : call the function verifyPhoneNumberWithCode(storedVerificationId)
+         * in order to check the Code
+         * the storedVerificationId was init in the callbacks in the function initAllData()
+         */
         verification.setOnClickListener {
             verifyPhoneNumberWithCode(storedVerificationId)
         }
 
+
+        /** call "LogIN if you already have an account"  buttons : navigate to the logIn fragment
+         * where the driver can login */
         view.findViewById<Button>(R.id.SGoToLogIn).setOnClickListener {
             findNavController().navigate(R.id.action_signin_to_loginFragment)
         }
 
+        /** the listener of the textView of the phoneNumber , after fulfill this field the sendCode Button appear */
         view.findViewById<EditText>(R.id.phone_number).setOnClickListener {
             sendCode.visibility = view.visibility
             sendCode.visibility = View.GONE
@@ -146,6 +172,7 @@ class Signin : Fragment() {
 
     }
 
+    /** check if fields in the login screen are fulfil  */
     private fun checkIfAllNotEmpty(): Boolean =
         firstName.text.toString() != "" &&
                 lastName.text.toString() != "" &&
@@ -153,6 +180,14 @@ class Signin : Fragment() {
                 password.text.toString() != "" &&
                 telephone.text.toString() != ""
 
+
+    /** this fonction call the StoreDriver from the DriverViewModel and after a task.isSuccessful (true)
+     * get the driverId created by Firebase and init the variable "driverId" with it.
+     * after we Create driver with createDriver()
+     * we call the setDriverinFirebse from the driverViewModel to store it in the realTime database.
+     * we pass this driverId to the ContextAppActivity (using the bundle) in order to fulfil the Travel propertie : driverID when a Driver
+     * will accept the Travel he want
+     * if task not succesfull , a toast will be send */
     private fun createemail(mail: String, password: String) {
 
         DriverViewModel().Storedriver(mail, password, this.activity).addOnCompleteListener { task ->
@@ -177,6 +212,7 @@ class Signin : Fragment() {
         }
     }
 
+    /** create the driver after using all the bindings   */
     private fun createDriver() {
         driver = Driver(
             driverId,
@@ -187,6 +223,8 @@ class Signin : Fragment() {
         )
     }
 
+    /** this fonction call the PhoneAuthProvider from Firebase after created the PhoneAuthOptions.
+     * after all call the verifyPhoneNumber */
     private fun startPhoneNumberVerification() {
         // [START start_phone_auth]
         Toast.makeText(this.requireActivity(), "init du phone", Toast.LENGTH_SHORT).show()
@@ -202,6 +240,10 @@ class Signin : Fragment() {
 
     }
 
+    /** this fonction called by the button verification from the signin fragment
+     * get the code from the binding and use it in the credential
+     * after all call the function signInWithPhoneAuthCredential(credential)
+     * */
     private fun verifyPhoneNumberWithCode(verificationId: String?) {
         // [START verify_with_code]
         val CODE = codeVerification.text.toString()
@@ -210,6 +252,9 @@ class Signin : Fragment() {
         signInWithPhoneAuthCredential(credential)
     }
 
+    /** this fonction call signInWithCredential(credential) from DriverViewModel()
+     * if everything is verified, enable the visibility of the submit Button and let the Driver create his Account
+     * */
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
 
         DriverViewModel().signInWithCredential(credential)
