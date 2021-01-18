@@ -6,8 +6,15 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.*
 import com.reouven.easydriver.entity.Travel
 
+/**
+ * the Class TravelRepository
+ * This class is called from theTravelViewModel in order to respect the MVVM architecture
+ * this class call the firebase functions
+ * */
 class TravelRepository {
 
+    /** the getLiveDataTravelListByStatus called by the view model in order to get all the travel by status
+     * this functon call the realtime database , do a snapshot of all the database and return a list of travels by status send by the viewModel */
     fun getLiveDataTravelListByStatus(status: String): LiveData<MutableList<Travel>> {
         val dataMutable = MutableLiveData<MutableList<Travel>>()
         var database = FirebaseDatabase.getInstance().getReference()
@@ -33,6 +40,8 @@ class TravelRepository {
         return dataMutable
     }
 
+    /** the getTravelDatabyDriverId called by the view model in order to get all the travel by driverId
+     * this function call the realtime database , do a snapshot of all the database and return a list of travels by driverId send by the viewModel */
     fun getTravelDatabyDriverId(driverId: String): LiveData<MutableList<Travel>> {
         val dataMutable = MutableLiveData<MutableList<Travel>>()
         var database = FirebaseDatabase.getInstance().getReference()
@@ -60,12 +69,16 @@ class TravelRepository {
 
     }
 
+    /** the UpdateDriverId called by the view model , send a driverId and a travel , in order to set
+     * this triverId of this travel in the realtime database  */
     fun UpdateDriverId(travel: Travel, driverId: String) {
         var reference = FirebaseDatabase.getInstance().getReference("Travel")
         reference.child(travel.travelId).child("driverId").setValue(driverId)
 
     }
 
+    /** the UpdateStatus called by the view model , send a status and a travel , in order to set
+     * this status of this travel in the realtime database  */
     fun UpdateStatus(travel: Travel, status: String) {
         var reference = FirebaseDatabase.getInstance().getReference("Travel")
         reference.child(travel.travelId).child("Status").setValue(status)

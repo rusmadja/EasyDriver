@@ -36,7 +36,6 @@ class UserViewModel() : ViewModel() {
 
     /** the StoreUser function called by the SignIN fragment in order to register (create) a User in the Database authentication
      * this function Called the function StoreUser from the UserRepository()
-     *
      */
     fun StoreUser (mail: String, password: String)= UserRepo.StoreUser(mail, password)
 
