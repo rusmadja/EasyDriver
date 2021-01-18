@@ -16,7 +16,7 @@ import com.reouven.easydriver.ui.activity.ContextAppActivity
 import com.reouven.easydriver.viewmodel.TravelViewModel
 
 /**
- * theAppMainFragment allow the Driver to see all a list of all the Travel with the Status "SEND"
+ * theAppMainFragment allow the Driver to see a list of all the Travel with the Status "SEND"
  * he can accept a travel and/or see all the Travel's details
  * */
 class AppMainFragment : Fragment() {
