@@ -10,14 +10,15 @@ package com.reouven.easydriver.entity
  * telephone number
  * */
 data class User(
-    val id: String,
-    val firstName: String = "Default Name",
-    val lastName: String = "Default Name",
+    var id: String = "null",
+    var first_name: String = "Default Name",
+    var last_name: String = "Default Name",
     var mail: String = "Default mail",
     var telephone: String = "Default Number"
 ) {
+
     override fun toString(): String {
-        return "User(id='$id', firstName='$firstName', lastName='$lastName', mail='$mail', telephone='$telephone')"
+        return "User(id='$id', firstName='$first_name', lastName='$last_name', mail='$mail', telephone='$telephone')"
     }
 }
 

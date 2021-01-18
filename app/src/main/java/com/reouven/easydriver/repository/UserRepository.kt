@@ -1,5 +1,7 @@
 package com.reouven.easydriver.repository
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
@@ -16,7 +18,8 @@ import kotlin.math.log
 class UserRepository() {
     /** the firebase reference */
     val reference = FirebaseDatabase.getInstance().getReference("User")
-
+    lateinit var uservaluestring: String
+    var uservalue: User? = null
     /** the setUserInFirebase function called by the userViewModel in order to register (create) a User in the Database realtime
      * this function Called set the value of the User in the DataBase the child of the reference "User" will be the UserId
      * and the childs of this UserId will be all the properties that the haspMap contain*/
@@ -47,27 +50,42 @@ class UserRepository() {
         user.sendPasswordResetEmail(mail)
     }
 
-    fun getUserById(userId: String): User {
-        lateinit var user:User
+    fun getUserById(userId: String): LiveData<MutableList<User>> {
+
+        val dataMutable = MutableLiveData<MutableList<User>>()
         var database = FirebaseDatabase.getInstance().getReference()
-        var query: Query = database.child("User")
+        var query: Query = database.child("User").orderByKey().equalTo(userId)
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(datasnapshot: DataSnapshot) {
+                val listData = mutableListOf<User>()
                 for (snapshot: DataSnapshot in datasnapshot.children) {
-                    if(snapshot.key==userId)
-                    user = snapshot.getValue(User::class.java)!!
+                    lateinit var user: User
+                    if (snapshot.exists()) {
+                        user = snapshot.getValue(User::class.java)!!
+                        user!!.id = snapshot.key.toString()
+                    }
+                    listData.add(user!!)
                 }
-
+                listData.reverse()
+                dataMutable.value = (listData)
 
             }
+
+
+
             override fun onCancelled(error: DatabaseError) {
+
             }
         })
-        return user
+
+        return dataMutable
+
     }
+
     /*=========================================================================================================*/
     /*===========================ajouter ici un get user info en fonction du id================================*/
     /*=========================================================================================================*/
     /*=========================================================================================================*/
+
 
 }

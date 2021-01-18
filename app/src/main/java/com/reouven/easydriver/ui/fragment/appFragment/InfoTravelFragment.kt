@@ -1,15 +1,23 @@
 package com.reouven.easydriver.ui.fragment.appFragment
 
+import android.content.ContentValues
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.database.*
 import com.reouven.easydriver.R
 import com.reouven.easydriver.entity.Travel
+import com.reouven.easydriver.entity.User
+import com.reouven.easydriver.viewmodel.TravelViewModel
 import com.reouven.easydriver.viewmodel.UserViewModel
 
 /**
@@ -17,7 +25,10 @@ import com.reouven.easydriver.viewmodel.UserViewModel
  * display all the details about a travel
  */
 class InfoTravelFragment : Fragment() {
-
+     var user: User?=null
+    val viewModel: UserViewModel by lazy {
+        ViewModelProviders.of(this).get(UserViewModel::class.java)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,13 +44,23 @@ class InfoTravelFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var lists:MutableList<User>? = mutableListOf()
         var value = arguments?.getString("travel").toString()
         var list = value.split(",") as MutableList<String>
         var travel = Travel(list[0], list[1], list[2], list[3], list[4], list[5], list[6], list[7],list[8],list[9])
-        //var user = UserViewModel().getUserById(travel.userId)
-        view.findViewById<TextView>(R.id.all_info).setText(value)
-       // view.findViewById<TextView>(R.id.userinfo).setText(user.toString())
 
+
+        var query: Query =  FirebaseDatabase.getInstance().getReference("User").child(travel.userId)
+        query.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(datasnapshot: DataSnapshot) {
+              view.findViewById<TextView>(R.id.userinfo).setText(datasnapshot.child("last_name").value.toString())
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+        view.findViewById<TextView>(R.id.all_info).setText(value)
 
         /**
          * this button return to the main list
@@ -47,5 +68,6 @@ class InfoTravelFragment : Fragment() {
         view.findViewById<Button>(R.id.returnToAllData).setOnClickListener {
             findNavController().navigate(R.id.action_infoTravelFragment_to_appMainFragment)
         }
+
     }
 }

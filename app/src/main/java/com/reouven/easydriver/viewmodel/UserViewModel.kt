@@ -3,7 +3,6 @@ package com.reouven.easydriver.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.reouven.easydriver.entity.Travel
 import com.reouven.easydriver.entity.User
 import com.reouven.easydriver.repository.UserRepository
 
@@ -47,8 +46,8 @@ class UserViewModel() : ViewModel() {
 
         var hsmap: HashMap<String, String> = hashMapOf()
 
-        hsmap.put("first_name", user.firstName)
-        hsmap.put("last_name", user.lastName)
+        hsmap.put("first_name", user.first_name)
+        hsmap.put("last_name", user.last_name)
         hsmap.put("mail", user.mail)
         hsmap.put("telephone", user.telephone)
 
@@ -56,7 +55,7 @@ class UserViewModel() : ViewModel() {
 
     }
 
-    fun getUserById(userId: String) : User
+    fun getUserById(userId: String) : MutableList<User>
     {
         return UserRepo.getUserById(userId)
 
