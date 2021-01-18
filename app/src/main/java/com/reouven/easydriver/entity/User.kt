@@ -15,4 +15,9 @@ data class User(
     val lastName: String = "Default Name",
     var mail: String = "Default mail",
     var telephone: String = "Default Number"
-)
+) {
+    override fun toString(): String {
+        return "User(id='$id', firstName='$firstName', lastName='$lastName', mail='$mail', telephone='$telephone')"
+    }
+}
+

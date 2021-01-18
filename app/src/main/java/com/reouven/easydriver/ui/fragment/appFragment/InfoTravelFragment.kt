@@ -9,6 +9,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.reouven.easydriver.R
+import com.reouven.easydriver.entity.Travel
+import com.reouven.easydriver.viewmodel.UserViewModel
+
 /**
  * InfoTravelFragment : this fragment is called after a click on an item of the list
  * display all the details about a travel
@@ -31,8 +34,11 @@ class InfoTravelFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         var value = arguments?.getString("travel").toString()
-
+        var list = value.split(",") as MutableList<String>
+        var travel = Travel(list[0], list[1], list[2], list[3], list[4], list[5], list[6], list[7],list[8],list[9])
+        //var user = UserViewModel().getUserById(travel.userId)
         view.findViewById<TextView>(R.id.all_info).setText(value)
+       // view.findViewById<TextView>(R.id.userinfo).setText(user.toString())
 
         /**
          * this button return to the main list

@@ -1,8 +1,12 @@
 package com.reouven.easydriver.repository
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
+import com.reouven.easydriver.entity.Travel
 import com.reouven.easydriver.entity.User
+import kotlin.math.log
 
 /**
  * the Class UserRepository
@@ -43,6 +47,24 @@ class UserRepository() {
         user.sendPasswordResetEmail(mail)
     }
 
+    fun getUserById(userId: String): User {
+        lateinit var user:User
+        var database = FirebaseDatabase.getInstance().getReference()
+        var query: Query = database.child("User")
+        query.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(datasnapshot: DataSnapshot) {
+                for (snapshot: DataSnapshot in datasnapshot.children) {
+                    if(snapshot.key==userId)
+                    user = snapshot.getValue(User::class.java)!!
+                }
+
+
+            }
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+        return user
+    }
     /*=========================================================================================================*/
     /*===========================ajouter ici un get user info en fonction du id================================*/
     /*=========================================================================================================*/

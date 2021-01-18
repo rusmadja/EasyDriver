@@ -1,7 +1,9 @@
 package com.reouven.easydriver.viewmodel
 
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.reouven.easydriver.entity.Travel
 import com.reouven.easydriver.entity.User
 import com.reouven.easydriver.repository.UserRepository
 
@@ -54,6 +56,11 @@ class UserViewModel() : ViewModel() {
 
     }
 
+    fun getUserById(userId: String) : User
+    {
+        return UserRepo.getUserById(userId)
+
+    }
     /*fun setUser(user: User){
     UserRepo.setUserInFirebase(user)}*/
 
