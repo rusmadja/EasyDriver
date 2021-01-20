@@ -69,7 +69,6 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:hint="Total Travel:"
-                    android:textAlignment="center"
                     android:textSize="@dimen/P2" />
 
                 <TextView

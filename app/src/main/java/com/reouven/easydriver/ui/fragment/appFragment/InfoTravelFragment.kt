@@ -67,7 +67,8 @@ class InfoTravelFragment : Fragment() {
         view.findViewById<TextView>(R.id.TravelArrival).setText(travel.adresse_arriver)
         view.findViewById<TextView>(R.id.TravelDateDeparture).setText(travel.Date_depart)
         view.findViewById<TextView>(R.id.TravelDateArrival).setText(travel.Date_arriver)
-        view.findViewById<TextView>(R.id.TravelID).setText(travel.travelId)
+        view.findViewById<TextView>(R.id.TravelPassagerNb).setText(travel.nb_voyageur)
+        view.findViewById<TextView>(R.id.TravelCreationDate).setText(travel.Date_reservation)
 
         /**
          * this button return to the main list

@@ -24,7 +24,7 @@ class Travel (
     var adresse_arriver:String="",
     var Date_depart:String="",
     var Date_arriver:String="",
-    var dateReservation:String="",
+    var Date_reservation:String="",
     var Status: String="",
     var travelId:String = "",
 
@@ -34,7 +34,7 @@ class Travel (
                 //"$userId, " + "$driverId,"+ "$nb_voyageur, " + "$adresse_depart, " + "$adresse_arriver, " + "$Date_depart, " + "$Date_arriver,"+ "$travelId"
 
 
-         "$userId, " + "$driverId,"+ "$nb_voyageur, " + "$adresse_depart, " + "$adresse_arriver, " + "$Date_depart, " + "$Date_arriver,"+ "$dateReservation,"+ "$Status,"+ "$travelId"
+         "$userId, " + "$driverId,"+ "$nb_voyageur, " + "$adresse_depart, " + "$adresse_arriver, " + "$Date_depart, " + "$Date_arriver,"+ "$Date_reservation,"+ "$Status,"+ "$travelId"
 
 
 }
