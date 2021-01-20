@@ -80,6 +80,7 @@ class ProfilFragment : Fragment() {
 
         view.findViewById<RatingBar>(R.id.ratingBar).setRating((0..5).random().toFloat())
 
+
     }
 }
 
