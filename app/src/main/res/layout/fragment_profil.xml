@@ -33,6 +33,15 @@
                 android:layout_gravity="center" />
 
             <TextView
+                android:id="@+id/userFirstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:hint="nom prenom"
+                android:textAlignment="center"
+                android:textSize="@dimen/P1" />
+            <TextView
+                android:id="@+id/userMail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -40,11 +49,13 @@
                 android:textAlignment="center"
                 android:textSize="@dimen/P1" />
 
+
             <TextView
+                android:id="@+id/userPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:hint="nom prenom"
+                android:hint="Phone"
                 android:textAlignment="center"
                 android:textSize="@dimen/P1" />
 

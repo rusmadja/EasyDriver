@@ -53,14 +53,21 @@ class InfoTravelFragment : Fragment() {
         var query: Query =  FirebaseDatabase.getInstance().getReference("User").child(travel.userId)
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(datasnapshot: DataSnapshot) {
-              view.findViewById<TextView>(R.id.userinfo).setText(datasnapshot.child("last_name").value.toString())
+              view.findViewById<TextView>(R.id.userFirstName).setText(datasnapshot.child("first_name").value.toString())
+              view.findViewById<TextView>(R.id.userLastName).setText(datasnapshot.child("last_name").value.toString())
+              view.findViewById<TextView>(R.id.userMail).setText(datasnapshot.child("mail").value.toString())
+              view.findViewById<TextView>(R.id.userPhone).setText(datasnapshot.child("telephone").value.toString())
             }
 
             override fun onCancelled(error: DatabaseError) {
 
             }
         })
-        view.findViewById<TextView>(R.id.all_info).setText(value)
+        view.findViewById<TextView>(R.id.TravelDeparture).setText(travel.adresse_depart)
+        view.findViewById<TextView>(R.id.TravelArrival).setText(travel.adresse_arriver)
+        view.findViewById<TextView>(R.id.TravelDateDeparture).setText(travel.Date_depart)
+        view.findViewById<TextView>(R.id.TravelDateArrival).setText(travel.Date_arriver)
+        view.findViewById<TextView>(R.id.TravelID).setText(travel.travelId)
 
         /**
          * this button return to the main list

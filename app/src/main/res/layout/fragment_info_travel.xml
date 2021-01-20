@@ -26,19 +26,214 @@
         android:id="@+id/userinfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ici mettre info de travel si il veut plus dinfo" />
+        android:gravity="center"
+        android:text="User : " />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint="First Name:"
+            android:textAlignment="center"
+            android:textSize="@dimen/P2" />
+
+        <TextView
+            android:id="@+id/userFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint=" "
+            android:textAlignment="center"
+            android:textSize="@dimen/P2" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint="Last Name:"
+            android:textAlignment="center"
+            android:textSize="@dimen/P2" />
+
+        <TextView
+            android:id="@+id/userLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint=""
+            android:textAlignment="center"
+            android:textSize="@dimen/P2" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint="Mail : "
+            android:textAlignment="center"
+            android:textSize="@dimen/P2" />
+
+        <TextView
+            android:id="@+id/userMail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint=""
+            android:textAlignment="center"
+            android:textSize="@dimen/P2" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint="Phone : "
+            android:textAlignment="center"
+            android:textSize="@dimen/P2" />
+
+        <TextView
+            android:id="@+id/userPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint=""
+            android:textAlignment="center"
+            android:textSize="@dimen/P2" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/travelinfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ici mettre info de travel si il veut plus dinfo" />
+        android:gravity="center"
+        android:text="Travel : " />
 
-    <TextView
-        android:id="@+id/all_info"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ici mettre info de travel si il veut plus dinfo" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint="Departure :"
+            android:textAlignment="center"
+            android:textSize="@dimen/P2" />
+
+        <TextView
+            android:id="@+id/TravelDeparture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint=""
+            android:textAlignment="center"
+            android:textSize="@dimen/P2" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint="Arrival : "
+            android:textAlignment="center"
+            android:textSize="@dimen/P2" />
+
+        <TextView
+            android:id="@+id/TravelArrival"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint=""
+            android:textAlignment="center"
+            android:textSize="@dimen/P2" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint="Date Departure:"
+            android:textAlignment="center"
+            android:textSize="@dimen/P2" />
+
+        <TextView
+            android:id="@+id/TravelDateDeparture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint=""
+            android:textAlignment="center"
+            android:textSize="@dimen/P2" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint="Date Arrival"
+            android:textAlignment="center"
+            android:textSize="@dimen/P2" />
+
+        <TextView
+            android:id="@+id/TravelDateArrival"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint=""
+            android:textAlignment="center"
+            android:textSize="@dimen/P2" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint="ID : "
+            android:textAlignment="center"
+            android:textSize="@dimen/P2" />
+
+        <TextView
+            android:id="@+id/TravelID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:hint=""
+            android:textAlignment="center"
+            android:textSize="@dimen/P2" />
+    </LinearLayout>
 
 
 </LinearLayout>
