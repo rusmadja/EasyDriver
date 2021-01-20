@@ -35,7 +35,6 @@ class ProfilFragment : Fragment() {
     ): View? {
 
         driverId=activity.driverId
-        Toast.makeText(this.context,driverId,Toast.LENGTH_LONG).show()
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profil, container, false)
     }
@@ -43,44 +42,54 @@ class ProfilFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var query: Query =  FirebaseDatabase.getInstance().getReference("Driver").child(driverId)
+        initTextView(view)
+
+    }
+
+    private fun initTextView(view: View) {
+        var query: Query = FirebaseDatabase.getInstance().getReference("Driver").child(driverId)
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(datasnapshot: DataSnapshot) {
                 if (datasnapshot.exists()) {
                     view.findViewById<TextView>(R.id.userMail)
                         .setText(datasnapshot.child("mail").value.toString())
                     view.findViewById<TextView>(R.id.userFirstName).setText(
-                        datasnapshot.child("first_name").value.toString() +"  "+ datasnapshot.child("last_name").value.toString()
+                        datasnapshot.child("first_name").value.toString() + "  " + datasnapshot.child(
+                            "last_name"
+                        ).value.toString()
                     )
-                    view.findViewById<TextView>(R.id.userPhone).setText(datasnapshot.child("telephone").value.toString())
+                    view.findViewById<TextView>(R.id.userPhone)
+                        .setText(datasnapshot.child("telephone").value.toString())
 
-                }
-                else{
-                    var query: Query =  FirebaseDatabase.getInstance().getReference("User").child(driverId)
+                } else {
+                    var query: Query =
+                        FirebaseDatabase.getInstance().getReference("User").child(driverId)
                     query.addValueEventListener(object : ValueEventListener {
                         override fun onDataChange(datasnapshot: DataSnapshot) {
                             if (datasnapshot.exists()) {
                                 view.findViewById<TextView>(R.id.userMail)
                                     .setText(datasnapshot.child("mail").value.toString())
                                 view.findViewById<TextView>(R.id.userFirstName).setText(
-                                    datasnapshot.child("first_name").value.toString() +"  "+ datasnapshot.child("last_name").value.toString()
+                                    datasnapshot.child("first_name").value.toString() + "  " + datasnapshot.child(
+                                        "last_name"
+                                    ).value.toString()
                                 )
-                                view.findViewById<TextView>(R.id.userPhone).setText(datasnapshot.child("telephone").value.toString())
+                                view.findViewById<TextView>(R.id.userPhone)
+                                    .setText(datasnapshot.child("telephone").value.toString())
 
                             }
                         }
+
                         override fun onCancelled(error: DatabaseError) {
                         }
                     })
                 }
             }
+
             override fun onCancelled(error: DatabaseError) {
             }
         })
-
         view.findViewById<RatingBar>(R.id.ratingBar).setRating((0..5).random().toFloat())
-
-
     }
 }
 
