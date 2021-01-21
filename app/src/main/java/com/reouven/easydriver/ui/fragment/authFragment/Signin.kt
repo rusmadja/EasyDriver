@@ -167,7 +167,7 @@ class Signin : Fragment() {
         /** the listener of the textView of the phoneNumber , after fulfill this field the sendCode Button appear */
         view.findViewById<EditText>(R.id.phone_number).setOnClickListener {
             sendCode.visibility = view.visibility
-            sendCode.visibility = View.GONE
+            //sendCode.visibility = View.GONE
         }
 
     }
